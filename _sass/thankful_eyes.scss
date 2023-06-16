@@ -22,7 +22,7 @@
 }
 .highlight .err {
   color: #fefeec;
-  background-color: #cc0000;
+  background-color: transparent;
 }
 .highlight .gr {
   color: #cc0000;
@@ -117,8 +117,7 @@
   font-weight: bold;
 }
 .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
-  color: #f696db;
-  font-weight: bold;
+  color: white;
 }
 .highlight .ld {
   color: #f696db;

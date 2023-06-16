@@ -1214,6 +1214,10 @@ ins {
   vertical-align: middle;
 }
 
+.err {
+  background-color: transparent;
+}
+
 .highlight table td {
   padding: 5px;
 }
@@ -1249,7 +1253,7 @@ ins {
 
 .highlight .err {
   color: #fefeec;
-  background-color: #cc0000;
+  background-color: transparent;
 }
 
 .highlight .gr {
@@ -1369,8 +1373,7 @@ ins {
 }
 
 .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
-  color: #f696db;
-  font-weight: bold;
+  color: white;
 }
 
 .highlight .ld {
