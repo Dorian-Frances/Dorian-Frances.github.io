@@ -71,7 +71,7 @@ ul {
   width: 200px;
   border: 8px solid #c4bff9;
   object-fit: cover;
-  object-position: 0 -0.1%;
+  object-position: 0 -8px;
 }
 
 .img-circle {
