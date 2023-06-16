@@ -1,0 +1,42 @@
+html {
+  height: 100%;
+}
+
+* {
+  justify-content: center;
+  align-items: center;
+  background-color: #2a3544;
+  color: #fff;
+  text-align: justify;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 18px;
+  height: 100%;
+  padding: 0;
+  display: grid;
+}
+
+p {
+  font-size: 22px;
+}
+
+a:hover {
+  color: #c4bff9;
+}
+
+.a-clickable:hover {
+  fill: #c4bff9;
+}
+
+h1 {
+  align-content: center;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+}

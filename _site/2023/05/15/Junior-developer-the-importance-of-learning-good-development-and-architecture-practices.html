@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Junior developer: the importance of learning good development and architecture practices</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:400,700" type="text/css">
+</head>
+<body>
+<header class="header">
+    <div class="hero-title">Dorian Frances</div>
+    <p class="hero-description">code enthusiast unraveling clean code magic!</p>
+    <div>
+    <ul class="nav-bar">
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/blog">Blog</a></li>
+<!--        <li class="nav-item"><a href="/about">About</a></li>-->
+        <li class="nav-item"><a href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a></li>
+        <li class="nav-item"><a href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a></li>
+    </ul>
+
+</div>
+
+</header>
+<div class="post">
+    <div class="post-header">
+        <h1>
+            Junior developer: the importance of learning good development and architecture practices
+        </h1>
+        <div class="meta-info">
+            <div class="tags">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                         stroke-width="1"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                </div>
+                
+                <div class="tag">
+                    best practices
+                </div>
+                
+            </div>
+            <div class="post-date">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                     stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <time>
+                    15 May 2023
+                </time>
+            </div>
+            <div class="reading-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor" stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <time>
+                    8 minutes to read
+                </time>
+            </div>
+            <!--Meta info-->
+        </div>
+    </div>
+    <article class="markdown-body">
+        <h1 id="introduction">Introduction</h1>
+
+<p>As a junior developer, when we think about training we usually focus on learning all the technologies and programming languages that exist. Indeed, we
+think that knowing as much technology as we can makes us more valuable on the employment market. Of course, it is not completely wrong as you will
+able to cover a wider spectrum of knowledge making you “available” for a lot of projects. Yet, in my experience, I would say that, this is not the
+smartest or most optimized choice.</p>
+
+<p>My name is Dorian Frances, I am a Software Engineer at Symeo for almost a year now and I will explain to you, through my personal experience as a
+junior developer, why you should focus your training on learning good development and architecture design practices instead of technologies and
+programming languages.</p>
+
+<h1 id="betting-on-your-carrier">Betting on your carrier</h1>
+
+<p>I told you that knowing a lot of technologies could be an advantage on the employment market and that is true. The question is: <strong>Is it worth spending
+that much time trying to learn all those programming languages theories instead of the fundamentals of clean architecture and clean code ?</strong> You
+learned 5 different technologies, that’s good, but will you use them in your projects ? Maybe or maybe not.</p>
+
+<p>With code architecture, you don’t even need to ask. There is code design in every single project. When you were at school, before a test, did you
+prioritize learning potential questions or those that you were sure were in that test ?</p>
+
+<p>Moreover, recruiters know that a junior developer cannot know a tons of technologies, therefore, learning more abstract concept like good development
+practices, the most used architecture structure, code quality… allows you to be more flexible and for a junior developer, that is really good. Don’t
+get too specific.</p>
+
+<p>Finally, profiles with good knowledge of architectural design are increasingly sought after. If the code that a developer produce do not fit great
+architectural conventions or code quality, it will need to be reviewed, slowing down the delivery of a project. Depending on the progress of the
+project, that could cost a lot of money and companies start to understand this.</p>
+
+<h1 id="a-technical-learning-logic">A technical learning logic</h1>
+
+<p>By this title, I mean that it makes more sense to learn good architectural design practices <strong>before</strong> focusing on learning too much technologies and
+I’ll explain why.</p>
+
+<p>First, by putting architecture design aside, you will pick up bad habits without even knowing it and that is natural. Even more if by misfortune, your
+first companies are not cautious about good practices. And you know how hard it is to forget our bad practices right ?</p>
+
+<p>Also, do not forget that technologies and programming languages are <strong>tools</strong>. And like all tools, they should be used to serve a
+greater purpose: <strong>your project</strong>. You wont contradict me if I say that it is preferable to understand when and why we should use a tool before
+starting to use it, right ? How could we possibly know which tool to use in order to build a house if we do not know how this house will look like,
+the layout of the different rooms, its toughness ? IT projects are exactly the same, the architecture of your code is the layout and plans of your
+house, the technologies, your tools. You may be hired inside a company to take care and develop only one part of the code base but as a developer, you
+are responsible of the entire project.</p>
+
+<blockquote>
+  <p>👉 This is a fundamental key of a concept called <strong>agility</strong>.</p>
+</blockquote>
+
+<p>Finally, you may ask yourself : “but what if I am being assigned a mission that requires the knowledge of a programming language that I don’t have” ?
+You are right, that can be unsettled. Yet, I’ll respond to you: once you understood the code architecture, the learning process of that programming
+language will be way more efficient. Indeed, you may not understand some part of the code but the simple act of understanding why this part of the
+code is here, you will know what it <strong>should</strong> <strong>do</strong>. And this, will help you out.</p>
+
+<h1 id="a-business-challenge">A business challenge</h1>
+
+<p>Nowadays, a good developer cannot ignore the close link existing between tech and business (at least if you want to be part of a promising project).
+Learning to understand quickly the structure of the code base will help you to assimilate the business of your company. Also, educating yourself to
+concept like <strong>Hexagonal Architecture</strong> or <strong>Domain Driven Development</strong> is an efficient way to learn how to spot features that need special
+attention.</p>
+
+<blockquote>
+  <p>👉 <strong>Disclaimer</strong>: all the code that a developer writes needs to be worked on but for features that do not bring significant gain, your company might as well invest in tools that has already been created for.</p>
+</blockquote>
+
+<p>Arriving in a project with understanding of the entire architecture allows you to have a more enlightened vision on the decisions that are made and
+you will only be happier inside the company.</p>
+
+<h1 id="personal-experience">Personal experience</h1>
+
+<p>Before arriving to Symeo, I was on an internship as a software engineer inside a company not very cautious about architecture design and good
+development practices were not implemented. Therefore, each time I was trying to develop something, I ran into questions like: “Where should I put
+that code ?”, “How could I make this work without breaking everything ?”.</p>
+
+<p>At this time, I didn’t even know tests existed. I was slowed down in my work by not knowing the key concepts of code design and architecture.</p>
+
+<p>When I arrived at Symeo through another internship, my mentors taught me a lot about those concepts. They prepared a list of resources (videos and
+articles) talking about clean architecture, code quality, testing, craftmanship… We also did some sessions of pair programming which is an efficient
+way to learn as the feedback loop is very small !</p>
+
+<p>Simultaneously, I was working with them on our first product, on the backend side, coded in Java. For your information, I had never coded in this
+programming language before, but as the code was well structured, well arranged, I could learn faster.</p>
+
+<p>We then, changed our product (the backend was still coded in Java) and you know what ? It was not that hard to work on this new project. The business
+was not the same, neither were the issues and yet, the structure was not totally unknown to me ! Thus, the business might have changed, our way of
+working did not allowing us to deliver quickly.</p>
+
+<p>Finally, we started another project which was coded in Typescript with NestJS as its framework and for me, back to an unknown programming language.
+Still, I was not completely lost as we continued to apply good architectural and code quality practices. It not only allowed me to learn the
+Typescript language, it also taught me how to use it <strong>well</strong>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Trying to learn about a bunch of technologies and programming languages is not a bad things, on the contrary, it reflects your will to progress. I
+wrote this article from the point of view of a junior developer based on my experience. We only talk about priorities here. If you ask me, i would say
+that starting from general issues and going to the specific ones is the best and most optimized way to learn.</p>
+
+    </article>
+</div>
+
+<div class="footer">
+    © 2023 - Dorian Frances
+    <div class="icons">
+        <a class="footer-icon" href="mailto:dfrances.pro@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+</body>
+</html>

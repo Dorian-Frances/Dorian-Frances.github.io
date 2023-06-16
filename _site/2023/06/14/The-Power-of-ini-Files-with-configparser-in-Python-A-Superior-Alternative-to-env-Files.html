@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:400,700" type="text/css">
+</head>
+<body>
+<header class="header">
+    <div class="hero-title">Dorian Frances</div>
+    <p class="hero-description">code enthusiast unraveling clean code magic!</p>
+    <div>
+    <ul class="nav-bar">
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/blog">Blog</a></li>
+<!--        <li class="nav-item"><a href="/about">About</a></li>-->
+        <li class="nav-item"><a href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a></li>
+        <li class="nav-item"><a href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a></li>
+    </ul>
+
+</div>
+
+</header>
+<div class="post">
+    <div class="post-header">
+        <h1>
+            The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files
+        </h1>
+        <div class="meta-info">
+            <div class="tags">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                         stroke-width="1"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                </div>
+                
+                <div class="tag">
+                    configuration
+                </div>
+                
+                <div class="tag">
+                    python
+                </div>
+                
+            </div>
+            <div class="post-date">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                     stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <time>
+                    14 June 2023
+                </time>
+            </div>
+            <div class="reading-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor" stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <time>
+                    10 minutes to read
+                </time>
+            </div>
+            <!--Meta info-->
+        </div>
+    </div>
+    <article class="markdown-body">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.</p>
+
+<h2 id="importance-of-configuration-files">Importance of Configuration Files</h2>
+
+<ol>
+  <li><em>Separation of Concerns</em>: Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
+  <li><em>Flexibility</em>: Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
+  <li><em>Security</em>: Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
+  <li><em>Collaboration</em>: Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
+  <li><em>Maintainability</em>: Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
+</ol>
+
+<h2 id="limitations-of-env-files">Limitations of <code class="language-plaintext highlighter-rouge">.env</code> files</h2>
+
+<p>While .env files have gained popularity for storing configuration variables, they do have limitations and challenges that developers should be aware of:</p>
+
+<ol>
+  <li><em>Limited Data Types</em>: .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
+  <li><em>Lack of Structure</em>: .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
+  <li><em>Absence of Hierarchy</em>: .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
+  <li><em>Limited Validation and Error Handling</em>: .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
+</ol>
+
+<p>Considering these limitations and challenges, developers often seek alternatives like .ini files with <em>configparser</em> in Python, which offer a more robust and structured approach to configuration management. In the following sections, we’ll explore the advantages of using .ini files and <em>configparser</em>, addressing these limitations and providing a superior solution for configuration handling in Python.</p>
+
+<h1 id="introducing-ini-files-and-configparser">Introducing <code class="language-plaintext highlighter-rouge">.ini</code> files and configparser</h1>
+
+<p>.ini files are configuration files with a specific structure and syntax. They consist of sections, keys, and values. Here’s a simple example:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># config.ini</span>
+
+<span class="nn">[section1]</span>
+<span class="py">key1</span> <span class="p">=</span> <span class="err">value</span><span class="mi">1</span>
+<span class="py">key2</span> <span class="p">=</span> <span class="err">value</span><span class="mi">2</span>
+
+<span class="nn">[section2]</span>
+<span class="py">key3</span> <span class="p">=</span> <span class="err">value</span><span class="mi">3</span>
+<span class="py">key4</span> <span class="p">=</span> <span class="err">value</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p>In Python, the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module can be used to read values from .ini files. Here’s a minimal code example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key1</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key2</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value3</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key3</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value4</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key4</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this brief example, we import the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module, create a <strong><code class="language-plaintext highlighter-rouge">ConfigParser</code></strong> instance, and read the content of the <strong><code class="language-plaintext highlighter-rouge">config.ini</code></strong> file. We then retrieve values from specific sections and keys using the <strong><code class="language-plaintext highlighter-rouge">get()</code></strong> method.</p>
+
+<h1 id="advantages-of-ini-files-with-configparser">Advantages of <code class="language-plaintext highlighter-rouge">.ini</code> files with configparser</h1>
+
+<h2 id="simplicity-and-readability">Simplicity and Readability</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="c1"># Read values from .ini file
+</span><span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Modify values and write back to .ini file
+</span><span class="n">config</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">new_value</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>In this example, we import the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module, create a <strong><code class="language-plaintext highlighter-rouge">ConfigParser</code></strong> instance, and read values from the <strong><code class="language-plaintext highlighter-rouge">config.ini</code></strong> file using the <strong><code class="language-plaintext highlighter-rouge">get()</code></strong> method.</p>
+
+<p>To modify values, we use the <strong><code class="language-plaintext highlighter-rouge">set()</code></strong> method to update a specific key within a section. Then, we write the changes back to the .ini file using the <strong><code class="language-plaintext highlighter-rouge">write()</code></strong> method.</p>
+
+<p><em>configparser</em> handles the complexities of parsing, accessing, modifying, and writing .ini files, simplifying the process for us (working with configuration values is hard enough as it is).</p>
+
+<h2 id="hierarchical-structure">Hierarchical Structure</h2>
+
+<p>.ini files can be organized into sections and subsections, providing a hierarchical structure for configuration variables.</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[section1]</span>
+<span class="py">key1</span> <span class="p">=</span> <span class="err">value</span><span class="mi">1</span>
+<span class="py">key2</span> <span class="p">=</span> <span class="err">value</span><span class="mi">2</span>
+
+<span class="nn">[section2]</span>
+<span class="py">key3</span> <span class="p">=</span> <span class="err">value</span><span class="mi">3</span>
+
+<span class="nn">[sub_section]</span>
+<span class="py">key4</span> <span class="p">=</span> <span class="err">value</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p>In this example, we have two sections, <strong><code class="language-plaintext highlighter-rouge">[section1]</code></strong> and <strong><code class="language-plaintext highlighter-rouge">[section2]</code></strong>. Additionally, there is a subsection <strong><code class="language-plaintext highlighter-rouge">[sub_section]</code></strong> nested within <strong><code class="language-plaintext highlighter-rouge">[section2]</code></strong>.</p>
+
+<p>By organizing configuration variables into sections and subsections, we can easily group related variables together, improving clarity and organization.</p>
+
+<p>To access <code class="language-plaintext highlighter-rouge">value4</code> , we then just need to write a few simple lines of code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value4</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2.sub_section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key4</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="multiple-value-types">Multiple Value Types</h2>
+
+<p><em>configparser</em> in Python supports various data types for configuration values, such as strings, integers, booleans, and floats.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">value_int</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getint</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value_bool</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getboolean</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value_float</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getfloat</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>By using the appropriate <strong><code class="language-plaintext highlighter-rouge">get</code></strong> methods provided by configparser (<strong><code class="language-plaintext highlighter-rouge">getint()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getboolean()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getfloat()</code></strong>), we can easily retrieve configuration values in the desired data type without the need for manual conversion. This flexibility in handling different data types simplifies the process of working with configuration variables of various types in Python applications.</p>
+
+<h2 id="error-handling-and-validation">Error Handling and Validation</h2>
+
+<p><em>configparser</em> in Python provides built-in error handling and validation mechanisms to ensure the correctness and integrity of configuration data. The main useful features could be sum up as follows:</p>
+
+<ol>
+  <li><em>Missing Section or Key Handling</em>: When accessing configuration values, configparser raises an error if a specified section or key is not found in the .ini file. This helps to catch and handle situations where expected configuration variables are missing.</li>
+  <li><em>Syntax Error Detection</em>: configparser detects and reports syntax errors in .ini files. If the file has incorrect syntax or formatting, configparser raises an error indicating the location and nature of the syntax error. This aids in identifying and resolving syntax-related issues in configuration files.</li>
+  <li><em>Type Conversion Errors</em>: As we said earlier in this article, <em>configparser</em> support typing verification. Thus, when using the specialized <strong><code class="language-plaintext highlighter-rouge">get</code></strong> methods (e.g., <strong><code class="language-plaintext highlighter-rouge">getint()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getboolean()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getfloat()</code></strong>), configparser automatically performs type conversions. If a configuration value cannot be converted to the requested type, configparser raises a type conversion error, preventing incorrect data usage.</li>
+  <li><em>Duplicate Sections and Keys</em>: <em>configparser</em> ensures that sections and keys in .ini files are unique. If a duplicate section or key is encountered, configparser raises an error, preventing ambiguity or conflicts in configuration data.</li>
+</ol>
+
+<h1 id="practical-example-for-the-use-of-ini-files">Practical example for the use of <code class="language-plaintext highlighter-rouge">.ini</code> files</h1>
+
+<p>For example, you could have at the root of your project two directories <code class="language-plaintext highlighter-rouge">properties</code> and <code class="language-plaintext highlighter-rouge">secrets</code>  as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>properties
+├── local.ini
+└── properties.ini
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>secrets
+├── local.ini
+└── secrets.ini
+</code></pre></div></div>
+
+<p>We just make a distinction for <em>properties</em> and <em>secrets</em> here but both folders refer configuration values.</p>
+
+<p>In your <strong><code class="language-plaintext highlighter-rouge">properties/local.ini</code></strong> (values used for local work) you will have:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[POSTGRES]</span>
+<span class="py">postgres_username</span> <span class="p">=</span> <span class="err">postgres</span>
+<span class="py">postgres_host</span> <span class="p">=</span> <span class="err">localhost</span>
+<span class="py">postgres_port</span> <span class="p">=</span> <span class="mi">5432</span>
+<span class="py">postgres_db</span> <span class="p">=</span> <span class="err">database</span>
+</code></pre></div></div>
+
+<p>In your <strong><code class="language-plaintext highlighter-rouge">properties/properties.ini</code></strong> (values used for production), you will have:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[POSTGRES]</span>
+<span class="py">postgres_username</span> <span class="p">=</span> <span class="err">%(POSTGRES_USER)s</span>
+<span class="py">postgres_host</span> <span class="p">=</span> <span class="err">%(POSTGRES_HOST)s</span>
+<span class="py">postgres_port</span> <span class="p">=</span> <span class="err">%(POSTGRES_PORT)s</span>
+<span class="py">postgres_db</span> <span class="p">=</span> <span class="err">%(POSTGRES_DB)s</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>👉 This notation is called <strong>interporlation</strong> It tells <em>configparser</em> that “POSTGRES_USER” refers to either, another variable present in the <code class="language-plaintext highlighter-rouge">.ini</code> file or an environment variable.</p>
+
+  <p>In the second case, to access that value in the code, you would need to call the variable as follows:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', **vars=os.environ**)</code></p>
+</blockquote>
+
+<p>When you want to deploy your application on your server, you then, can set your <strong>environment variables values</strong> in you CI/CD (e.g. CircleCI) and create a script to export them on your server when deploying so that your code can access it.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p><code class="language-plaintext highlighter-rouge">.env</code> files are convenient, for sure, as they are generally well implemented in many available frameworks. But <code class="language-plaintext highlighter-rouge">.ini</code> files offer a lot of powerful features, such as hierarchical structure, data validation, error handling, multiple value types, etc…</p>
+
+<p>Those make the use of <code class="language-plaintext highlighter-rouge">.ini</code> files really intuitive and robust, that is why, I, as a software engineer advise people to use them.</p>
+
+<p>The difference of use may appear insignificant, but those configuration values are, more often thant you think, the source of production regression. You may forget to set a value ? Or more subtil, you may set <code class="language-plaintext highlighter-rouge">"5432"</code> instead of <code class="language-plaintext highlighter-rouge">5432</code> as your database port value ?</p>
+
+<p>Being an effective developer is about reducing, as much as possible, our feedback loop. When something is not supposed to work, we appreciate knowing it as soon as possible and <code class="language-plaintext highlighter-rouge">.ini</code> features such as <em>data validation</em> (among others) could make a difference in your development efficiency.</p>
+
+    </article>
+</div>
+
+<div class="footer">
+    © 2023 - Dorian Frances
+    <div class="icons">
+        <a class="footer-icon" href="mailto:dfrances.pro@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+</body>
+</html>

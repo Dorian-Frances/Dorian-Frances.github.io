@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-16T16:42:52+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dorian Frances</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title><link href="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html" rel="alternate" type="text/html" title="The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files" /><published>2023-06-14T00:00:00+02:00</published><updated>2023-06-14T00:00:00+02:00</updated><id>http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files</id><content type="html" xml:base="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+
+<p>Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.</p>
+
+<h2 id="importance-of-configuration-files">Importance of Configuration Files</h2>
+
+<ol>
+  <li><em>Separation of Concerns</em>: Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
+  <li><em>Flexibility</em>: Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
+  <li><em>Security</em>: Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
+  <li><em>Collaboration</em>: Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
+  <li><em>Maintainability</em>: Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
+</ol>
+
+<h2 id="limitations-of-env-files">Limitations of <code class="language-plaintext highlighter-rouge">.env</code> files</h2>
+
+<p>While .env files have gained popularity for storing configuration variables, they do have limitations and challenges that developers should be aware of:</p>
+
+<ol>
+  <li><em>Limited Data Types</em>: .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
+  <li><em>Lack of Structure</em>: .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
+  <li><em>Absence of Hierarchy</em>: .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
+  <li><em>Limited Validation and Error Handling</em>: .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
+</ol>
+
+<p>Considering these limitations and challenges, developers often seek alternatives like .ini files with <em>configparser</em> in Python, which offer a more robust and structured approach to configuration management. In the following sections, we’ll explore the advantages of using .ini files and <em>configparser</em>, addressing these limitations and providing a superior solution for configuration handling in Python.</p>
+
+<h1 id="introducing-ini-files-and-configparser">Introducing <code class="language-plaintext highlighter-rouge">.ini</code> files and configparser</h1>
+
+<p>.ini files are configuration files with a specific structure and syntax. They consist of sections, keys, and values. Here’s a simple example:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># config.ini</span>
+
+<span class="nn">[section1]</span>
+<span class="py">key1</span> <span class="p">=</span> <span class="err">value</span><span class="mi">1</span>
+<span class="py">key2</span> <span class="p">=</span> <span class="err">value</span><span class="mi">2</span>
+
+<span class="nn">[section2]</span>
+<span class="py">key3</span> <span class="p">=</span> <span class="err">value</span><span class="mi">3</span>
+<span class="py">key4</span> <span class="p">=</span> <span class="err">value</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p>In Python, the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module can be used to read values from .ini files. Here’s a minimal code example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key1</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key2</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value3</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key3</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value4</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key4</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this brief example, we import the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module, create a <strong><code class="language-plaintext highlighter-rouge">ConfigParser</code></strong> instance, and read the content of the <strong><code class="language-plaintext highlighter-rouge">config.ini</code></strong> file. We then retrieve values from specific sections and keys using the <strong><code class="language-plaintext highlighter-rouge">get()</code></strong> method.</p>
+
+<h1 id="advantages-of-ini-files-with-configparser">Advantages of <code class="language-plaintext highlighter-rouge">.ini</code> files with configparser</h1>
+
+<h2 id="simplicity-and-readability">Simplicity and Readability</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="c1"># Read values from .ini file
+</span><span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Modify values and write back to .ini file
+</span><span class="n">config</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">new_value</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>In this example, we import the <strong><code class="language-plaintext highlighter-rouge">configparser</code></strong> module, create a <strong><code class="language-plaintext highlighter-rouge">ConfigParser</code></strong> instance, and read values from the <strong><code class="language-plaintext highlighter-rouge">config.ini</code></strong> file using the <strong><code class="language-plaintext highlighter-rouge">get()</code></strong> method.</p>
+
+<p>To modify values, we use the <strong><code class="language-plaintext highlighter-rouge">set()</code></strong> method to update a specific key within a section. Then, we write the changes back to the .ini file using the <strong><code class="language-plaintext highlighter-rouge">write()</code></strong> method.</p>
+
+<p><em>configparser</em> handles the complexities of parsing, accessing, modifying, and writing .ini files, simplifying the process for us (working with configuration values is hard enough as it is).</p>
+
+<h2 id="hierarchical-structure">Hierarchical Structure</h2>
+
+<p>.ini files can be organized into sections and subsections, providing a hierarchical structure for configuration variables.</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[section1]</span>
+<span class="py">key1</span> <span class="p">=</span> <span class="err">value</span><span class="mi">1</span>
+<span class="py">key2</span> <span class="p">=</span> <span class="err">value</span><span class="mi">2</span>
+
+<span class="nn">[section2]</span>
+<span class="py">key3</span> <span class="p">=</span> <span class="err">value</span><span class="mi">3</span>
+
+<span class="nn">[sub_section]</span>
+<span class="py">key4</span> <span class="p">=</span> <span class="err">value</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p>In this example, we have two sections, <strong><code class="language-plaintext highlighter-rouge">[section1]</code></strong> and <strong><code class="language-plaintext highlighter-rouge">[section2]</code></strong>. Additionally, there is a subsection <strong><code class="language-plaintext highlighter-rouge">[sub_section]</code></strong> nested within <strong><code class="language-plaintext highlighter-rouge">[section2]</code></strong>.</p>
+
+<p>By organizing configuration variables into sections and subsections, we can easily group related variables together, improving clarity and organization.</p>
+
+<p>To access <code class="language-plaintext highlighter-rouge">value4</code> , we then just need to write a few simple lines of code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="nc">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="sh">'</span><span class="s">config.ini</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">value4</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">section2.sub_section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key4</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="multiple-value-types">Multiple Value Types</h2>
+
+<p><em>configparser</em> in Python supports various data types for configuration values, such as strings, integers, booleans, and floats.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">value_int</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getint</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value_bool</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getboolean</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">value_float</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="nf">getfloat</span><span class="p">(</span><span class="sh">'</span><span class="s">section</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">key</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>By using the appropriate <strong><code class="language-plaintext highlighter-rouge">get</code></strong> methods provided by configparser (<strong><code class="language-plaintext highlighter-rouge">getint()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getboolean()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getfloat()</code></strong>), we can easily retrieve configuration values in the desired data type without the need for manual conversion. This flexibility in handling different data types simplifies the process of working with configuration variables of various types in Python applications.</p>
+
+<h2 id="error-handling-and-validation">Error Handling and Validation</h2>
+
+<p><em>configparser</em> in Python provides built-in error handling and validation mechanisms to ensure the correctness and integrity of configuration data. The main useful features could be sum up as follows:</p>
+
+<ol>
+  <li><em>Missing Section or Key Handling</em>: When accessing configuration values, configparser raises an error if a specified section or key is not found in the .ini file. This helps to catch and handle situations where expected configuration variables are missing.</li>
+  <li><em>Syntax Error Detection</em>: configparser detects and reports syntax errors in .ini files. If the file has incorrect syntax or formatting, configparser raises an error indicating the location and nature of the syntax error. This aids in identifying and resolving syntax-related issues in configuration files.</li>
+  <li><em>Type Conversion Errors</em>: As we said earlier in this article, <em>configparser</em> support typing verification. Thus, when using the specialized <strong><code class="language-plaintext highlighter-rouge">get</code></strong> methods (e.g., <strong><code class="language-plaintext highlighter-rouge">getint()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getboolean()</code></strong>, <strong><code class="language-plaintext highlighter-rouge">getfloat()</code></strong>), configparser automatically performs type conversions. If a configuration value cannot be converted to the requested type, configparser raises a type conversion error, preventing incorrect data usage.</li>
+  <li><em>Duplicate Sections and Keys</em>: <em>configparser</em> ensures that sections and keys in .ini files are unique. If a duplicate section or key is encountered, configparser raises an error, preventing ambiguity or conflicts in configuration data.</li>
+</ol>
+
+<h1 id="practical-example-for-the-use-of-ini-files">Practical example for the use of <code class="language-plaintext highlighter-rouge">.ini</code> files</h1>
+
+<p>For example, you could have at the root of your project two directories <code class="language-plaintext highlighter-rouge">properties</code> and <code class="language-plaintext highlighter-rouge">secrets</code>  as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>properties
+├── local.ini
+└── properties.ini
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>secrets
+├── local.ini
+└── secrets.ini
+</code></pre></div></div>
+
+<p>We just make a distinction for <em>properties</em> and <em>secrets</em> here but both folders refer configuration values.</p>
+
+<p>In your <strong><code class="language-plaintext highlighter-rouge">properties/local.ini</code></strong> (values used for local work) you will have:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[POSTGRES]</span>
+<span class="py">postgres_username</span> <span class="p">=</span> <span class="err">postgres</span>
+<span class="py">postgres_host</span> <span class="p">=</span> <span class="err">localhost</span>
+<span class="py">postgres_port</span> <span class="p">=</span> <span class="mi">5432</span>
+<span class="py">postgres_db</span> <span class="p">=</span> <span class="err">database</span>
+</code></pre></div></div>
+
+<p>In your <strong><code class="language-plaintext highlighter-rouge">properties/properties.ini</code></strong> (values used for production), you will have:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[POSTGRES]</span>
+<span class="py">postgres_username</span> <span class="p">=</span> <span class="err">%(POSTGRES_USER)s</span>
+<span class="py">postgres_host</span> <span class="p">=</span> <span class="err">%(POSTGRES_HOST)s</span>
+<span class="py">postgres_port</span> <span class="p">=</span> <span class="err">%(POSTGRES_PORT)s</span>
+<span class="py">postgres_db</span> <span class="p">=</span> <span class="err">%(POSTGRES_DB)s</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>👉 This notation is called <strong>interporlation</strong> It tells <em>configparser</em> that “POSTGRES_USER” refers to either, another variable present in the <code class="language-plaintext highlighter-rouge">.ini</code> file or an environment variable.</p>
+
+  <p>In the second case, to access that value in the code, you would need to call the variable as follows:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', **vars=os.environ**)</code></p>
+</blockquote>
+
+<p>When you want to deploy your application on your server, you then, can set your <strong>environment variables values</strong> in you CI/CD (e.g. CircleCI) and create a script to export them on your server when deploying so that your code can access it.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p><code class="language-plaintext highlighter-rouge">.env</code> files are convenient, for sure, as they are generally well implemented in many available frameworks. But <code class="language-plaintext highlighter-rouge">.ini</code> files offer a lot of powerful features, such as hierarchical structure, data validation, error handling, multiple value types, etc…</p>
+
+<p>Those make the use of <code class="language-plaintext highlighter-rouge">.ini</code> files really intuitive and robust, that is why, I, as a software engineer advise people to use them.</p>
+
+<p>The difference of use may appear insignificant, but those configuration values are, more often thant you think, the source of production regression. You may forget to set a value ? Or more subtil, you may set <code class="language-plaintext highlighter-rouge">"5432"</code> instead of <code class="language-plaintext highlighter-rouge">5432</code> as your database port value ?</p>
+
+<p>Being an effective developer is about reducing, as much as possible, our feedback loop. When something is not supposed to work, we appreciate knowing it as soon as possible and <code class="language-plaintext highlighter-rouge">.ini</code> features such as <em>data validation</em> (among others) could make a difference in your development efficiency.</p>]]></content><author><name></name></author><category term="configuration" /><category term="python" /><summary type="html"><![CDATA[Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.]]></summary></entry><entry><title type="html">Junior developer: the importance of learning good development and architecture practices</title><link href="http://localhost:4000/2023/05/15/Junior-developer-the-importance-of-learning-good-development-and-architecture-practices.html" rel="alternate" type="text/html" title="Junior developer: the importance of learning good development and architecture practices" /><published>2023-05-15T00:00:00+02:00</published><updated>2023-05-15T00:00:00+02:00</updated><id>http://localhost:4000/2023/05/15/Junior-developer-the-importance-of-learning-good-development-and-architecture-practices</id><content type="html" xml:base="http://localhost:4000/2023/05/15/Junior-developer-the-importance-of-learning-good-development-and-architecture-practices.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+
+<p>As a junior developer, when we think about training we usually focus on learning all the technologies and programming languages that exist. Indeed, we
+think that knowing as much technology as we can makes us more valuable on the employment market. Of course, it is not completely wrong as you will
+able to cover a wider spectrum of knowledge making you “available” for a lot of projects. Yet, in my experience, I would say that, this is not the
+smartest or most optimized choice.</p>
+
+<p>My name is Dorian Frances, I am a Software Engineer at Symeo for almost a year now and I will explain to you, through my personal experience as a
+junior developer, why you should focus your training on learning good development and architecture design practices instead of technologies and
+programming languages.</p>
+
+<h1 id="betting-on-your-carrier">Betting on your carrier</h1>
+
+<p>I told you that knowing a lot of technologies could be an advantage on the employment market and that is true. The question is: <strong>Is it worth spending
+that much time trying to learn all those programming languages theories instead of the fundamentals of clean architecture and clean code ?</strong> You
+learned 5 different technologies, that’s good, but will you use them in your projects ? Maybe or maybe not.</p>
+
+<p>With code architecture, you don’t even need to ask. There is code design in every single project. When you were at school, before a test, did you
+prioritize learning potential questions or those that you were sure were in that test ?</p>
+
+<p>Moreover, recruiters know that a junior developer cannot know a tons of technologies, therefore, learning more abstract concept like good development
+practices, the most used architecture structure, code quality… allows you to be more flexible and for a junior developer, that is really good. Don’t
+get too specific.</p>
+
+<p>Finally, profiles with good knowledge of architectural design are increasingly sought after. If the code that a developer produce do not fit great
+architectural conventions or code quality, it will need to be reviewed, slowing down the delivery of a project. Depending on the progress of the
+project, that could cost a lot of money and companies start to understand this.</p>
+
+<h1 id="a-technical-learning-logic">A technical learning logic</h1>
+
+<p>By this title, I mean that it makes more sense to learn good architectural design practices <strong>before</strong> focusing on learning too much technologies and
+I’ll explain why.</p>
+
+<p>First, by putting architecture design aside, you will pick up bad habits without even knowing it and that is natural. Even more if by misfortune, your
+first companies are not cautious about good practices. And you know how hard it is to forget our bad practices right ?</p>
+
+<p>Also, do not forget that technologies and programming languages are <strong>tools</strong>. And like all tools, they should be used to serve a
+greater purpose: <strong>your project</strong>. You wont contradict me if I say that it is preferable to understand when and why we should use a tool before
+starting to use it, right ? How could we possibly know which tool to use in order to build a house if we do not know how this house will look like,
+the layout of the different rooms, its toughness ? IT projects are exactly the same, the architecture of your code is the layout and plans of your
+house, the technologies, your tools. You may be hired inside a company to take care and develop only one part of the code base but as a developer, you
+are responsible of the entire project.</p>
+
+<blockquote>
+  <p>👉 This is a fundamental key of a concept called <strong>agility</strong>.</p>
+</blockquote>
+
+<p>Finally, you may ask yourself : “but what if I am being assigned a mission that requires the knowledge of a programming language that I don’t have” ?
+You are right, that can be unsettled. Yet, I’ll respond to you: once you understood the code architecture, the learning process of that programming
+language will be way more efficient. Indeed, you may not understand some part of the code but the simple act of understanding why this part of the
+code is here, you will know what it <strong>should</strong> <strong>do</strong>. And this, will help you out.</p>
+
+<h1 id="a-business-challenge">A business challenge</h1>
+
+<p>Nowadays, a good developer cannot ignore the close link existing between tech and business (at least if you want to be part of a promising project).
+Learning to understand quickly the structure of the code base will help you to assimilate the business of your company. Also, educating yourself to
+concept like <strong>Hexagonal Architecture</strong> or <strong>Domain Driven Development</strong> is an efficient way to learn how to spot features that need special
+attention.</p>
+
+<blockquote>
+  <p>👉 <strong>Disclaimer</strong>: all the code that a developer writes needs to be worked on but for features that do not bring significant gain, your company might as well invest in tools that has already been created for.</p>
+</blockquote>
+
+<p>Arriving in a project with understanding of the entire architecture allows you to have a more enlightened vision on the decisions that are made and
+you will only be happier inside the company.</p>
+
+<h1 id="personal-experience">Personal experience</h1>
+
+<p>Before arriving to Symeo, I was on an internship as a software engineer inside a company not very cautious about architecture design and good
+development practices were not implemented. Therefore, each time I was trying to develop something, I ran into questions like: “Where should I put
+that code ?”, “How could I make this work without breaking everything ?”.</p>
+
+<p>At this time, I didn’t even know tests existed. I was slowed down in my work by not knowing the key concepts of code design and architecture.</p>
+
+<p>When I arrived at Symeo through another internship, my mentors taught me a lot about those concepts. They prepared a list of resources (videos and
+articles) talking about clean architecture, code quality, testing, craftmanship… We also did some sessions of pair programming which is an efficient
+way to learn as the feedback loop is very small !</p>
+
+<p>Simultaneously, I was working with them on our first product, on the backend side, coded in Java. For your information, I had never coded in this
+programming language before, but as the code was well structured, well arranged, I could learn faster.</p>
+
+<p>We then, changed our product (the backend was still coded in Java) and you know what ? It was not that hard to work on this new project. The business
+was not the same, neither were the issues and yet, the structure was not totally unknown to me ! Thus, the business might have changed, our way of
+working did not allowing us to deliver quickly.</p>
+
+<p>Finally, we started another project which was coded in Typescript with NestJS as its framework and for me, back to an unknown programming language.
+Still, I was not completely lost as we continued to apply good architectural and code quality practices. It not only allowed me to learn the
+Typescript language, it also taught me how to use it <strong>well</strong>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Trying to learn about a bunch of technologies and programming languages is not a bad things, on the contrary, it reflects your will to progress. I
+wrote this article from the point of view of a junior developer based on my experience. We only talk about priorities here. If you ask me, i would say
+that starting from general issues and going to the specific ones is the best and most optimized way to learn.</p>]]></content><author><name></name></author><category term="best practices" /><summary type="html"><![CDATA[Greetings, fellow junior developers! We all embark on our coding journeys with an insatiable thirst for knowledge, eagerly devouring every programming language and technology in our path. It's only natural to believe that the more technologies we master, the more valuable we become in the competitive job market. After all, versatility seems like the ultimate key to unlocking endless opportunities. But what if I told you there's a smarter and more optimized approach to reaching your career goals?]]></summary></entry><entry><title type="html">How to bootstrap a NestJS project using Clean Architecture</title><link href="http://localhost:4000/2023/05/11/How-to-bootstrap-a-NestJS-project-using-Clean-Architecture.html" rel="alternate" type="text/html" title="How to bootstrap a NestJS project using Clean Architecture" /><published>2023-05-11T00:00:00+02:00</published><updated>2023-05-11T00:00:00+02:00</updated><id>http://localhost:4000/2023/05/11/How-to-bootstrap-a-NestJS-project-using-Clean-Architecture</id><content type="html" xml:base="http://localhost:4000/2023/05/11/How-to-bootstrap-a-NestJS-project-using-Clean-Architecture.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+
+<p>Starting off on the wrong foot for a project can be very incapacitating and at the same time, there is no direct value for the client. In this article
+you will learn how to put yourself (and your team) on the right track in order to start a project serenely. Indeed, the goal here is to set a solid
+and modular code base architecture allowing you to produce quality code in order to enhance the productivity or your team.</p>
+
+<blockquote>
+  <p>👉 Remember, <strong>quality</strong> implies <strong>efficiency</strong> !</p>
+</blockquote>
+
+<p>With this in mind, we will go through two major concepts :</p>
+
+<ul>
+  <li>Clean architecture</li>
+  <li>Dependency injection</li>
+</ul>
+
+<h1 id="initialize-the-project">Initialize the project</h1>
+
+<p>The first things we need to do is to create our project, thus, with <code class="language-plaintext highlighter-rouge">npm</code> installed you can create you new NestJS project with the following
+commands :</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i <span class="nt">-g</span> @nestjs/cli
+nest new project-name
+</code></pre></div></div>
+
+<p>After that, NestJS will generate your project that will contain dist, node_modules and several other classic files of a project. Initially, your <code class="language-plaintext highlighter-rouge">src</code>
+folder will look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── app.controller.spec.ts
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+└── main.ts
+</code></pre></div></div>
+
+<h1 id="clean-architecture">Clean architecture</h1>
+
+<h3 id="structure">Structure</h3>
+
+<p>In order to build a project that will fit clean architecture principles, in most cases, hexagonal architecture with <strong>Domain-Driven-Development</strong> (
+DDD) is welcome. Indeed, it allows us to isolate our business code making it independent from the different technical implementations (databases,
+external APIs, etc…) that may need to change.</p>
+
+<p>Therefore, at the end, we want our structure to look as the following diagram:</p>
+
+<p><img src="/assets/images/architecture-1.jpg" alt="architecture-1.jpg" /></p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">src</code> folder will then, look like this (we moved the <code class="language-plaintext highlighter-rouge">.spec.*</code> file into the <code class="language-plaintext highlighter-rouge">/test</code> folder as we prefer to have all our tests in it):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── application
+│   └── rest-api-adapter
+│       ├── controller
+│           └── app.controller.ts
+├── bootstrap
+│   └── app.module.ts
+├── domain
+│   └── app.service.ts
+├── infrastructure
+│   └── postgres-adapter
+│       ├── adapter
+│           └── postgres.adapter.ts
+└── main.ts
+</code></pre></div></div>
+
+<h2 id="example-of-a-feature">Example of a feature</h2>
+
+<p>We now have the basic structure of our project but let’s say we want to add a feature that allows us to retrieve a user based on its <code class="language-plaintext highlighter-rouge">id</code> thanks to
+a <code class="language-plaintext highlighter-rouge">Rest API</code> from a <code class="language-plaintext highlighter-rouge">postgresSQL</code> database. How should this look like ?</p>
+
+<h3 id="designing-our-feature">Designing our feature</h3>
+
+<p>We talked earlier about technical implementations on which our business logic (domain) should not be dependent of. In our case, our technical
+implementations are :</p>
+
+<ul>
+  <li>The Rest API</li>
+  <li>The postgreSQL database</li>
+</ul>
+
+<p>This is the reason why we will move those elements inside packages that are called <strong>adapters</strong> and we will connect them to our domain through
+interfaces named <strong>ports</strong>.</p>
+
+<p>The architecture of ou project will then look like this:</p>
+
+<p><img src="/assets/images/architecture-2.jpg" alt="architecture-2.jpg" /></p>
+
+<p>That way, if at some point in the life of the project, we would come up with the idea to change the database, we would just have to create a new
+adapter with a new port and connect everything to our domain without having to change our business code (domain).</p>
+
+<p>Now, the structure of our code looks like this (with a bit of renaming to fit our use case):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── application
+│   └── rest-api-adapter
+│       ├── controller
+│       │   └── user.controller.ts
+│       └── dto
+│           ├── get-user.dto.ts
+│           └── user.dto.ts
+├── bootstrap
+│   ├── app.module.ts
+|		├── rest-api-adapter.module.ts
+│   ├── domain.module.ts
+│   └── postgres-adapter.module.ts
+├── domain
+│   ├── model
+│   │   └── user.model.ts
+│   ├── port
+│   │   ├── in
+│   │   │   └── user.facade.ts
+│   │   └── out
+│   │       └── user.storage.port.ts
+│   └── service
+│       └── user.service.ts
+├── infrastructure
+│   └── postgres-adapter
+│       ├── adapter
+│       │   └── postgres.user.adapter.ts
+│       ├── entity
+│       │   └── user.entity.ts
+│       └── ormconfig.ts
+└── main.ts
+</code></pre></div></div>
+
+<p>We still have our 4 main directories (application, domain, infrastructure and boostrap). We see our <code class="language-plaintext highlighter-rouge">rest-api-adapter</code> which will contain our
+controllers and DTOs, our domain containing our models, our ports (in order to discuss with technical dependencies) and our services where we can put
+our business logic inside. We also notice our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> . For the purpose of this example, we used <a href="https://typeorm.io/">TypeORM</a> to manage
+our database.</p>
+
+<p><strong>Controllers</strong></p>
+
+<p>For our case, the <code class="language-plaintext highlighter-rouge">user.controller.ts</code> looks as follows:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">Param</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">GetUserDTO</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../dto/get-user.dto</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserFacade</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../../../domain/port/in/user.facade</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Controller</span><span class="p">(</span><span class="dl">'</span><span class="s1">/users</span><span class="dl">'</span><span class="p">)</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">(</span>
+        <span class="p">@</span><span class="nd">Inject</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserFacade</span><span class="dl">'</span><span class="p">)</span>
+        <span class="k">private</span> <span class="k">readonly</span> <span class="nx">userFacade</span><span class="p">:</span> <span class="nx">UserFacade</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">Get</span><span class="p">(</span><span class="dl">'</span><span class="s1">:userId</span><span class="dl">'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="nf">getUser</span><span class="p">(@</span><span class="nd">Param</span><span class="p">(</span><span class="dl">'</span><span class="s1">userId</span><span class="dl">'</span><span class="p">)</span> <span class="nx">userId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">GetUserDTO</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">userFacade</span><span class="p">.</span><span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">GetUserDTO</span><span class="p">.</span><span class="nf">fromDomain</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We pass the interface <code class="language-plaintext highlighter-rouge">UserFacade</code> inside the container of our controller as a dependency.</p>
+
+<p><strong>Services</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">user.service.ts</code> looks like this:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">UserFacade</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../port/in/user.facade</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">User</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../model/user.model</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserStoragePort</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../port/out/user.storage.port</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="k">implements</span> <span class="nx">UserFacade</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userStoragePort</span><span class="p">:</span> <span class="nx">UserStoragePort</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">async</span> <span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">userStoragePort</span><span class="p">.</span><span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+        <span class="cm">/*
+        Manipulating the object (Business Logic)
+         */</span>
+        <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>By passing to our service a simple interface (<code class="language-plaintext highlighter-rouge">UserStoragePort</code>), we make it independent. The service, which is part of our domain, just retrieves an
+object from an implementation without knowing which one (in that case, our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> ). Then we can manipulate this object and return it to
+our <code class="language-plaintext highlighter-rouge">rest-api-adapter</code>.</p>
+
+<blockquote>
+  <p>👉 We clearly see that if we decide to change our database or our API for anything else, it will not affect our business code at any time.</p>
+</blockquote>
+
+<h3 id="creating-our-local-database">Creating our local database</h3>
+
+<p>For this example, we will create our database using <code class="language-plaintext highlighter-rouge">docker-compose</code> .</p>
+
+<p>At the root of your folder, you will add a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file with the following content:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.2'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">linux/amd64</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgres:13"</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">example-container"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=P@ssw0rd</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_DB=example-database</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5432:5432"</span>
+</code></pre></div></div>
+
+<p>You then can launch your local database with the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
+</code></pre></div></div>
+
+<h1 id="dependency-injection">Dependency injection</h1>
+
+<p>If we try to launch our application in its current state, it won’t work. Indeed we still have to write our dependency injections. That is the purpose
+of the <code class="language-plaintext highlighter-rouge">bootstrap</code> folder. NestJS works with <a href="https://docs.nestjs.com/modules">modules</a>. We will have an <em>AppModule</em> (which should have been generated
+at initialization). This is the first module that will be imported at runtime by our <code class="language-plaintext highlighter-rouge">main.ts</code> file.</p>
+
+<blockquote>
+  <p>👉 <strong>Important</strong> : The concept of clean architecture involves a very powerful notion which is <strong>dependency inversion</strong> that makes our domain only
+dependent on abstractions (interfaces). Consequently, this increase the modularity of our code and makes it way more testable.</p>
+</blockquote>
+
+<p>Back to our project, if we take the example of our <code class="language-plaintext highlighter-rouge">domain.module.ts</code> to see how we make our dependency injections, we see this:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Module</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">PostgresAdapterModule</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./postgres-adapter.module</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserStoragePort</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../domain/port/out/user.storage.port</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserService</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../domain/service/user.service</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">UserFacadeProvider</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">provide</span><span class="p">:</span> <span class="dl">'</span><span class="s1">UserFacade</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">useFactory</span><span class="p">:</span> <span class="p">(</span><span class="na">userStoragePort</span><span class="p">:</span> <span class="nx">UserStoragePort</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">new</span> <span class="nc">UserService</span><span class="p">(</span><span class="nx">userStoragePort</span><span class="p">),</span>
+    <span class="na">inject</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">PostgresUserAdapter</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">};</span>
+
+<span class="p">@</span><span class="nd">Module</span><span class="p">({</span>
+    <span class="na">imports</span><span class="p">:</span> <span class="p">[</span><span class="nx">PostgresAdapterModule</span><span class="p">],</span>
+    <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserFacadeProvider</span><span class="p">],</span>
+    <span class="na">exports</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserFacadeProvider</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">DomainModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We import inside the <code class="language-plaintext highlighter-rouge">DomainModule</code> the <code class="language-plaintext highlighter-rouge">PostgresAdapterModule</code> in order to provide the implementation to our <code class="language-plaintext highlighter-rouge">UserStoragePort</code> that is used inside
+our service (i.e the <code class="language-plaintext highlighter-rouge">PostgresUserAdapter</code> here).</p>
+
+<p>We then export the entire DomainModule in order to be able to use it inside our <code class="language-plaintext highlighter-rouge">RestApiAdapterModule</code> as follows:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Module</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">DomainModule</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./domain.module</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserController</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../application/rest-api-adapter/controller/user.controller</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Module</span><span class="p">({</span>
+    <span class="na">imports</span><span class="p">:</span> <span class="p">[</span><span class="nx">DomainModule</span><span class="p">],</span>
+    <span class="na">controllers</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserController</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">RestApiAdapterModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As it is the module of our Rest API, this is where we import our <em>controllers</em>.</p>
+
+<p>For the postgres-adapter module to work properly, it remains to configure TypeORM but I leave it to you to do so by using the
+official <a href="https://docs.nestjs.com/techniques/database">documentation of NestJS</a>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>If you followed the steps of this article and been able to start your application properly, you should now have a project with a clean architecture
+that will allow you to build modular applications. Besides, your business code won’t be dependent on your choices of implementation allowing you to
+make mistakes (yes it happens).</p>]]></content><author><name></name></author><category term="bootstrap" /><category term="architecture" /><summary type="html"><![CDATA[Starting off on the wrong foot for a project can be very incapacitating, and at the same time, it offers no direct value for you. In this article, I'll try to show you how you can put yourself (and your team) on the right track to begin a project with confidence. The goal here is to help you establish a solid and modular code base architecture using the NestJS template, enabling you to produce quality code and enhance your team's productivity.]]></summary></entry></feed>

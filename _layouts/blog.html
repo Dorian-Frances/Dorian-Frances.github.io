@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{page.title}}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<header class="header">
+    <div class="hero-title">Dorian Frances</div>
+    <p class="hero-description">code enthusiast unraveling clean code magic!</p>
+    {% include navbar.html %}
+</header>
+<div class="content">
+    <div class="home-title">
+        Blog posts & Articles
+    </div>
+    <div class="posts">
+        {% for post in site.posts %}
+        <div class="post">
+            <div class="post-title">
+                <h2>
+                    <a href="{{ post.url | relative_url }}">
+                        {{post.title}}
+                    </a>
+                </h2>
+            </div>
+            <div class="post-meta-info">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                         stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <time>
+                        {{ post.date | date: "%-d %B %Y" }}
+                    </time>
+                </div>
+            </div>
+            <p class="description">{{post.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{{content}}
+
+{% include footer.html %}

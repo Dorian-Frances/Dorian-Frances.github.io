@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<header class="header">
+    <div class="hero-title">Dorian Frances</div>
+    <p class="hero-description">code enthusiast unraveling clean code magic!</p>
+    {% include navbar.html %}
+</header>
+<div class="post">
+    <div class="post-header">
+        <h1>
+            {{page.title}}
+        </h1>
+        <div class="meta-info">
+            <div class="tags">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                         stroke-width="1"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                </div>
+                {% for tag in page.tags %}
+                <div class="tag">
+                    {{ tag }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="post-date">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                     stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <time>
+                    {{ page.date | date: "%-d %B %Y" }}
+                </time>
+            </div>
+            <div class="reading-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor" stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <time>
+                    {{ page.reading-time }} minutes to read
+                </time>
+            </div>
+            <!--Meta info-->
+        </div>
+    </div>
+    <article class="markdown-body">
+        {{ content }}
+    </article>
+</div>
+
+{% include footer.html %}

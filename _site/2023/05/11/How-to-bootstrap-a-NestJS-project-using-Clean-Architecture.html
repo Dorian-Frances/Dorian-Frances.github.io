@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to bootstrap a NestJS project using Clean Architecture</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:400,700" type="text/css">
+</head>
+<body>
+<header class="header">
+    <div class="hero-title">Dorian Frances</div>
+    <p class="hero-description">code enthusiast unraveling clean code magic!</p>
+    <div>
+    <ul class="nav-bar">
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/blog">Blog</a></li>
+<!--        <li class="nav-item"><a href="/about">About</a></li>-->
+        <li class="nav-item"><a href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a></li>
+        <li class="nav-item"><a href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a></li>
+    </ul>
+
+</div>
+
+</header>
+<div class="post">
+    <div class="post-header">
+        <h1>
+            How to bootstrap a NestJS project using Clean Architecture
+        </h1>
+        <div class="meta-info">
+            <div class="tags">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                         stroke-width="1"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                </div>
+                
+                <div class="tag">
+                    bootstrap
+                </div>
+                
+                <div class="tag">
+                    architecture
+                </div>
+                
+            </div>
+            <div class="post-date">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor"
+                     stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <time>
+                    11 May 2023
+                </time>
+            </div>
+            <div class="reading-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill-opacity="0" stroke="currentColor" stroke-width="1"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <time>
+                    10 minutes to read
+                </time>
+            </div>
+            <!--Meta info-->
+        </div>
+    </div>
+    <article class="markdown-body">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Starting off on the wrong foot for a project can be very incapacitating and at the same time, there is no direct value for the client. In this article
+you will learn how to put yourself (and your team) on the right track in order to start a project serenely. Indeed, the goal here is to set a solid
+and modular code base architecture allowing you to produce quality code in order to enhance the productivity or your team.</p>
+
+<blockquote>
+  <p>👉 Remember, <strong>quality</strong> implies <strong>efficiency</strong> !</p>
+</blockquote>
+
+<p>With this in mind, we will go through two major concepts :</p>
+
+<ul>
+  <li>Clean architecture</li>
+  <li>Dependency injection</li>
+</ul>
+
+<h1 id="initialize-the-project">Initialize the project</h1>
+
+<p>The first things we need to do is to create our project, thus, with <code class="language-plaintext highlighter-rouge">npm</code> installed you can create you new NestJS project with the following
+commands :</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i <span class="nt">-g</span> @nestjs/cli
+nest new project-name
+</code></pre></div></div>
+
+<p>After that, NestJS will generate your project that will contain dist, node_modules and several other classic files of a project. Initially, your <code class="language-plaintext highlighter-rouge">src</code>
+folder will look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── app.controller.spec.ts
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+└── main.ts
+</code></pre></div></div>
+
+<h1 id="clean-architecture">Clean architecture</h1>
+
+<h3 id="structure">Structure</h3>
+
+<p>In order to build a project that will fit clean architecture principles, in most cases, hexagonal architecture with <strong>Domain-Driven-Development</strong> (
+DDD) is welcome. Indeed, it allows us to isolate our business code making it independent from the different technical implementations (databases,
+external APIs, etc…) that may need to change.</p>
+
+<p>Therefore, at the end, we want our structure to look as the following diagram:</p>
+
+<p><img src="/assets/images/architecture-1.jpg" alt="architecture-1.jpg" /></p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">src</code> folder will then, look like this (we moved the <code class="language-plaintext highlighter-rouge">.spec.*</code> file into the <code class="language-plaintext highlighter-rouge">/test</code> folder as we prefer to have all our tests in it):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── application
+│   └── rest-api-adapter
+│       ├── controller
+│           └── app.controller.ts
+├── bootstrap
+│   └── app.module.ts
+├── domain
+│   └── app.service.ts
+├── infrastructure
+│   └── postgres-adapter
+│       ├── adapter
+│           └── postgres.adapter.ts
+└── main.ts
+</code></pre></div></div>
+
+<h2 id="example-of-a-feature">Example of a feature</h2>
+
+<p>We now have the basic structure of our project but let’s say we want to add a feature that allows us to retrieve a user based on its <code class="language-plaintext highlighter-rouge">id</code> thanks to
+a <code class="language-plaintext highlighter-rouge">Rest API</code> from a <code class="language-plaintext highlighter-rouge">postgresSQL</code> database. How should this look like ?</p>
+
+<h3 id="designing-our-feature">Designing our feature</h3>
+
+<p>We talked earlier about technical implementations on which our business logic (domain) should not be dependent of. In our case, our technical
+implementations are :</p>
+
+<ul>
+  <li>The Rest API</li>
+  <li>The postgreSQL database</li>
+</ul>
+
+<p>This is the reason why we will move those elements inside packages that are called <strong>adapters</strong> and we will connect them to our domain through
+interfaces named <strong>ports</strong>.</p>
+
+<p>The architecture of ou project will then look like this:</p>
+
+<p><img src="/assets/images/architecture-2.jpg" alt="architecture-2.jpg" /></p>
+
+<p>That way, if at some point in the life of the project, we would come up with the idea to change the database, we would just have to create a new
+adapter with a new port and connect everything to our domain without having to change our business code (domain).</p>
+
+<p>Now, the structure of our code looks like this (with a bit of renaming to fit our use case):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src
+├── application
+│   └── rest-api-adapter
+│       ├── controller
+│       │   └── user.controller.ts
+│       └── dto
+│           ├── get-user.dto.ts
+│           └── user.dto.ts
+├── bootstrap
+│   ├── app.module.ts
+|		├── rest-api-adapter.module.ts
+│   ├── domain.module.ts
+│   └── postgres-adapter.module.ts
+├── domain
+│   ├── model
+│   │   └── user.model.ts
+│   ├── port
+│   │   ├── in
+│   │   │   └── user.facade.ts
+│   │   └── out
+│   │       └── user.storage.port.ts
+│   └── service
+│       └── user.service.ts
+├── infrastructure
+│   └── postgres-adapter
+│       ├── adapter
+│       │   └── postgres.user.adapter.ts
+│       ├── entity
+│       │   └── user.entity.ts
+│       └── ormconfig.ts
+└── main.ts
+</code></pre></div></div>
+
+<p>We still have our 4 main directories (application, domain, infrastructure and boostrap). We see our <code class="language-plaintext highlighter-rouge">rest-api-adapter</code> which will contain our
+controllers and DTOs, our domain containing our models, our ports (in order to discuss with technical dependencies) and our services where we can put
+our business logic inside. We also notice our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> . For the purpose of this example, we used <a href="https://typeorm.io/">TypeORM</a> to manage
+our database.</p>
+
+<p><strong>Controllers</strong></p>
+
+<p>For our case, the <code class="language-plaintext highlighter-rouge">user.controller.ts</code> looks as follows:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Controller</span><span class="p">,</span> <span class="nx">Get</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">Param</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">GetUserDTO</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../dto/get-user.dto</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserFacade</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../../../domain/port/in/user.facade</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Controller</span><span class="p">(</span><span class="dl">'</span><span class="s1">/users</span><span class="dl">'</span><span class="p">)</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">(</span>
+        <span class="p">@</span><span class="nd">Inject</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserFacade</span><span class="dl">'</span><span class="p">)</span>
+        <span class="k">private</span> <span class="k">readonly</span> <span class="nx">userFacade</span><span class="p">:</span> <span class="nx">UserFacade</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">Get</span><span class="p">(</span><span class="dl">'</span><span class="s1">:userId</span><span class="dl">'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="nf">getUser</span><span class="p">(@</span><span class="nd">Param</span><span class="p">(</span><span class="dl">'</span><span class="s1">userId</span><span class="dl">'</span><span class="p">)</span> <span class="nx">userId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">GetUserDTO</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">userFacade</span><span class="p">.</span><span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">GetUserDTO</span><span class="p">.</span><span class="nf">fromDomain</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We pass the interface <code class="language-plaintext highlighter-rouge">UserFacade</code> inside the container of our controller as a dependency.</p>
+
+<p><strong>Services</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">user.service.ts</code> looks like this:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">UserFacade</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../port/in/user.facade</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">User</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../model/user.model</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserStoragePort</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../port/out/user.storage.port</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="k">implements</span> <span class="nx">UserFacade</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userStoragePort</span><span class="p">:</span> <span class="nx">UserStoragePort</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">async</span> <span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">userStoragePort</span><span class="p">.</span><span class="nf">getUserById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+        <span class="cm">/*
+        Manipulating the object (Business Logic)
+         */</span>
+        <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>By passing to our service a simple interface (<code class="language-plaintext highlighter-rouge">UserStoragePort</code>), we make it independent. The service, which is part of our domain, just retrieves an
+object from an implementation without knowing which one (in that case, our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> ). Then we can manipulate this object and return it to
+our <code class="language-plaintext highlighter-rouge">rest-api-adapter</code>.</p>
+
+<blockquote>
+  <p>👉 We clearly see that if we decide to change our database or our API for anything else, it will not affect our business code at any time.</p>
+</blockquote>
+
+<h3 id="creating-our-local-database">Creating our local database</h3>
+
+<p>For this example, we will create our database using <code class="language-plaintext highlighter-rouge">docker-compose</code> .</p>
+
+<p>At the root of your folder, you will add a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file with the following content:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.2'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="na">platform</span><span class="pi">:</span> <span class="s">linux/amd64</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgres:13"</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">example-container"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=P@ssw0rd</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_DB=example-database</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5432:5432"</span>
+</code></pre></div></div>
+
+<p>You then can launch your local database with the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
+</code></pre></div></div>
+
+<h1 id="dependency-injection">Dependency injection</h1>
+
+<p>If we try to launch our application in its current state, it won’t work. Indeed we still have to write our dependency injections. That is the purpose
+of the <code class="language-plaintext highlighter-rouge">bootstrap</code> folder. NestJS works with <a href="https://docs.nestjs.com/modules">modules</a>. We will have an <em>AppModule</em> (which should have been generated
+at initialization). This is the first module that will be imported at runtime by our <code class="language-plaintext highlighter-rouge">main.ts</code> file.</p>
+
+<blockquote>
+  <p>👉 <strong>Important</strong> : The concept of clean architecture involves a very powerful notion which is <strong>dependency inversion</strong> that makes our domain only
+dependent on abstractions (interfaces). Consequently, this increase the modularity of our code and makes it way more testable.</p>
+</blockquote>
+
+<p>Back to our project, if we take the example of our <code class="language-plaintext highlighter-rouge">domain.module.ts</code> to see how we make our dependency injections, we see this:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Module</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">PostgresAdapterModule</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./postgres-adapter.module</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserStoragePort</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../domain/port/out/user.storage.port</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserService</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../domain/service/user.service</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">UserFacadeProvider</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">provide</span><span class="p">:</span> <span class="dl">'</span><span class="s1">UserFacade</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">useFactory</span><span class="p">:</span> <span class="p">(</span><span class="na">userStoragePort</span><span class="p">:</span> <span class="nx">UserStoragePort</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">new</span> <span class="nc">UserService</span><span class="p">(</span><span class="nx">userStoragePort</span><span class="p">),</span>
+    <span class="na">inject</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">PostgresUserAdapter</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">};</span>
+
+<span class="p">@</span><span class="nd">Module</span><span class="p">({</span>
+    <span class="na">imports</span><span class="p">:</span> <span class="p">[</span><span class="nx">PostgresAdapterModule</span><span class="p">],</span>
+    <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserFacadeProvider</span><span class="p">],</span>
+    <span class="na">exports</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserFacadeProvider</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">DomainModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We import inside the <code class="language-plaintext highlighter-rouge">DomainModule</code> the <code class="language-plaintext highlighter-rouge">PostgresAdapterModule</code> in order to provide the implementation to our <code class="language-plaintext highlighter-rouge">UserStoragePort</code> that is used inside
+our service (i.e the <code class="language-plaintext highlighter-rouge">PostgresUserAdapter</code> here).</p>
+
+<p>We then export the entire DomainModule in order to be able to use it inside our <code class="language-plaintext highlighter-rouge">RestApiAdapterModule</code> as follows:</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Module</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@nestjs/common</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">DomainModule</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./domain.module</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">UserController</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../application/rest-api-adapter/controller/user.controller</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Module</span><span class="p">({</span>
+    <span class="na">imports</span><span class="p">:</span> <span class="p">[</span><span class="nx">DomainModule</span><span class="p">],</span>
+    <span class="na">controllers</span><span class="p">:</span> <span class="p">[</span><span class="nx">UserController</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">RestApiAdapterModule</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As it is the module of our Rest API, this is where we import our <em>controllers</em>.</p>
+
+<p>For the postgres-adapter module to work properly, it remains to configure TypeORM but I leave it to you to do so by using the
+official <a href="https://docs.nestjs.com/techniques/database">documentation of NestJS</a>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>If you followed the steps of this article and been able to start your application properly, you should now have a project with a clean architecture
+that will allow you to build modular applications. Besides, your business code won’t be dependent on your choices of implementation allowing you to
+make mistakes (yes it happens).</p>
+
+    </article>
+</div>
+
+<div class="footer">
+    © 2023 - Dorian Frances
+    <div class="icons">
+        <a class="footer-icon" href="mailto:dfrances.pro@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://github.com/Dorian-Frances">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 496 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+            </svg>
+        </a>
+        <a class="footer-icon" href="https://www.linkedin.com/in/dfrances1112/">
+            <svg class="a-clickable" xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512">
+                <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>svg {
+                    fill: #ffffff
+                }</style>
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-title {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Roboto Slab', sans-serif;
+  color: #c4bff9;
+}
+
+.hero-description {
+  font-style: italic;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.image {
+  text-align: center;
+}
+
+.image img {
+  vertical-align: middle;
+  margin: 32px 0;
+  height: 200px;
+  width: 200px;
+  border: 8px solid #c4bff9;
+  object-fit: cover;
+  object-position: 0 -0.1%;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.content {
+  max-width: 600px;
+  min-width: 0;
+  text-align: left;
+}
+
+.content div p {
+  text-align: justify;
+}
+
+del {
+  text-decoration: line-through;
+  background-color: #f56476;
+  color: #ffffff;
+  padding: 0 5px;
+}
+
+ins {
+  background-color: #c4bff9;
+  color: #000000;
+  padding: 0 5px;
+  font-style: italic;
+}
+
+.home-title {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Roboto Slab', sans-serif;
+  color: #ffffff;
+  text-align: center;
+}
