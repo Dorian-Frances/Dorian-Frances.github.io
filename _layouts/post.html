@@ -58,8 +58,8 @@ layout: default
     </article>
 </div>
 
-{% include comments.html %}
+{% if page.comments %}
+    {% include comments.html %}
+{% endif%}
 
 {% include footer.html %}
-
-<script id="dsq-count-scr" src="//dfrances-blog.disqus.com/count.js" async></script>

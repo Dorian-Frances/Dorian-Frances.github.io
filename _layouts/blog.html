@@ -39,7 +39,7 @@ layout: default
                         {{ post.date | date: "%-d %B %Y" }}
                     </time>
                      -
-                    <a href="{{ post.url | relative_url }}#disqus_thread"></a>
+                    <a class="comment-count" href="{{ post.url | relative_url }}#disqus_thread"></a>
                 </div>
             </div>
             <p class="description">{{post.description}}</p>
@@ -48,6 +48,9 @@ layout: default
     </div>
 
 </div>
+
 {{content}}
 
 {% include footer.html %}
+
+<script id="dsq-count-scr" src="//dfrances-blog.disqus.com/count.js" async></script>

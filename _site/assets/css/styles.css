@@ -161,6 +161,11 @@ ins {
   font-style: italic;
 }
 
+.post-meta-info .comment-count {
+  color: #91c0fe;
+  font-style: italic;
+}
+
 .post .description {
   padding-top: 20px;
   font-size: 18px;
