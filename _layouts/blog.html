@@ -38,6 +38,8 @@ layout: default
                     <time>
                         {{ post.date | date: "%-d %B %Y" }}
                     </time>
+                     -
+                    <a href="{{ post.url | relative_url }}#disqus_thread"></a>
                 </div>
             </div>
             <p class="description">{{post.description}}</p>
