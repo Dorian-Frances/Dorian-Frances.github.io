@@ -110,7 +110,7 @@ src
 │           └── user.dto.ts
 ├── bootstrap
 │   ├── app.module.ts
-|		├── rest-api-adapter.module.ts
+│   ├── rest-api-adapter.module.ts
 │   ├── domain.module.ts
 │   └── postgres-adapter.module.ts
 ├── domain
