@@ -5,6 +5,7 @@ date: 2023-06-14
 tags: [configuration, python]
 reading-time: 10
 description: Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.
+comments: true
 ---
 
 # Introduction

@@ -5,6 +5,7 @@ date: 2023-05-15
 tags: [best practices]
 reading-time: 8
 description: Greetings, fellow junior developers! We all embark on our coding journeys with an insatiable thirst for knowledge, eagerly devouring every programming language and technology in our path. It's only natural to believe that the more technologies we master, the more valuable we become in the competitive job market. After all, versatility seems like the ultimate key to unlocking endless opportunities. But what if I told you there's a smarter and more optimized approach to reaching your career goals?
+comments: true
 ---
 
 # Introduction

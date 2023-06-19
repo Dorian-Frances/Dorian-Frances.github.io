@@ -5,6 +5,7 @@ date: 2023-05-11
 tags: [bootstrap, architecture]
 reading-time: 10
 description: Starting off on the wrong foot for a project can be very incapacitating, and at the same time, it offers no direct value for you. In this article, I'll try to show you how you can put yourself (and your team) on the right track to begin a project with confidence. The goal here is to help you establish a solid and modular code base architecture using the NestJS template, enabling you to produce quality code and enhance your team's productivity.
+comments: true
 ---
 
 # Introduction
