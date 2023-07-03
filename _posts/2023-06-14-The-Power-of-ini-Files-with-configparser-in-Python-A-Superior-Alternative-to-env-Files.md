@@ -3,7 +3,7 @@ layout: post
 title: "The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files"
 date: 2023-06-14
 tags: [configuration, python]
-reading-time: 10
+reading-time: 5
 description: Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.
 comments: true
 ---
@@ -14,20 +14,20 @@ Configuration files are crucial in software development as they store essential 
 
 ## Importance of Configuration Files
 
-1. *Separation of Concerns*: Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.
-2. *Flexibility*: Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.
-3. *Security*: Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.
-4. *Collaboration*: Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.
-5. *Maintainability*: Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.
+1. *Separation of Concerns:* Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.
+2. *Flexibility:* Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.
+3. *Security:* Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.
+4. *Collaboration:* Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.
+5. *Maintainability:* Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.
 
 ## Limitations of `.env` files
 
 While .env files have gained popularity for storing configuration variables, they do have limitations and challenges that developers should be aware of:
 
-1. *Limited Data Types*: .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.
-2. *Lack of Structure*: .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.
-3. *Absence of Hierarchy*: .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.
-4. *Limited Validation and Error Handling*: .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it's possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.
+1. *Limited Data Types:* .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.
+2. *Lack of Structure:* .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.
+3. *Absence of Hierarchy:* .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.
+4. *Limited Validation and Error Handling:* .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it's possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.
 
 Considering these limitations and challenges, developers often seek alternatives like .ini files with *configparser* in Python, which offer a more robust and structured approach to configuration management. In the following sections, we'll explore the advantages of using .ini files and *configparser*, addressing these limitations and providing a superior solution for configuration handling in Python.
 
@@ -181,7 +181,7 @@ postgres_db = %(POSTGRES_DB)s
 > 
 > In the second case, to access that value in the code, you would need to call the variable as follows:
 > 
-> `config.get('POSTGRES', 'postgres_username', **vars=os.environ**)`
+> `config.get('POSTGRES', 'postgres_username', vars=os.environ)`
 
 
 When you want to deploy your application on your server, you then, can set your **environment variables values** in you CI/CD (e.g. CircleCI) and create a script to export them on your server when deploying so that your code can access it.  

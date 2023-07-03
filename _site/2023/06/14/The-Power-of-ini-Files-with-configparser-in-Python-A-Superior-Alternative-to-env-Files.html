@@ -92,7 +92,7 @@
                     <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
                 <time>
-                    10 minutes to read
+                    5 minutes to read
                 </time>
             </div>
             <!--Meta info-->
@@ -106,11 +106,11 @@
 <h2 id="importance-of-configuration-files">Importance of Configuration Files</h2>
 
 <ol>
-  <li><em>Separation of Concerns</em>: Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
-  <li><em>Flexibility</em>: Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
-  <li><em>Security</em>: Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
-  <li><em>Collaboration</em>: Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
-  <li><em>Maintainability</em>: Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
+  <li><em>Separation of Concerns:</em> Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
+  <li><em>Flexibility:</em> Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
+  <li><em>Security:</em> Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
+  <li><em>Collaboration:</em> Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
+  <li><em>Maintainability:</em> Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
 </ol>
 
 <h2 id="limitations-of-env-files">Limitations of <code class="language-plaintext highlighter-rouge">.env</code> files</h2>
@@ -118,10 +118,10 @@
 <p>While .env files have gained popularity for storing configuration variables, they do have limitations and challenges that developers should be aware of:</p>
 
 <ol>
-  <li><em>Limited Data Types</em>: .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
-  <li><em>Lack of Structure</em>: .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
-  <li><em>Absence of Hierarchy</em>: .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
-  <li><em>Limited Validation and Error Handling</em>: .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
+  <li><em>Limited Data Types:</em> .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
+  <li><em>Lack of Structure:</em> .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
+  <li><em>Absence of Hierarchy:</em> .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
+  <li><em>Limited Validation and Error Handling:</em> .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
 </ol>
 
 <p>Considering these limitations and challenges, developers often seek alternatives like .ini files with <em>configparser</em> in Python, which offer a more robust and structured approach to configuration management. In the following sections, we’ll explore the advantages of using .ini files and <em>configparser</em>, addressing these limitations and providing a superior solution for configuration handling in Python.</p>
@@ -269,7 +269,7 @@
 
   <p>In the second case, to access that value in the code, you would need to call the variable as follows:</p>
 
-  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', **vars=os.environ**)</code></p>
+  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', vars=os.environ)</code></p>
 </blockquote>
 
 <p>When you want to deploy your application on your server, you then, can set your <strong>environment variables values</strong> in you CI/CD (e.g. CircleCI) and create a script to export them on your server when deploying so that your code can access it.</p>

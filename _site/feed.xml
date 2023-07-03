@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-06-19T16:34:18+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dorian Frances</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title><link href="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html" rel="alternate" type="text/html" title="The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files" /><published>2023-06-14T00:00:00+02:00</published><updated>2023-06-14T00:00:00+02:00</updated><id>http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files</id><content type="html" xml:base="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-03T10:08:27+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dorian Frances</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title><link href="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html" rel="alternate" type="text/html" title="The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files" /><published>2023-06-14T00:00:00+02:00</published><updated>2023-06-14T00:00:00+02:00</updated><id>http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files</id><content type="html" xml:base="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html"><![CDATA[<h1 id="introduction">Introduction</h1>
 
 <p>Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.</p>
 
 <h2 id="importance-of-configuration-files">Importance of Configuration Files</h2>
 
 <ol>
-  <li><em>Separation of Concerns</em>: Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
-  <li><em>Flexibility</em>: Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
-  <li><em>Security</em>: Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
-  <li><em>Collaboration</em>: Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
-  <li><em>Maintainability</em>: Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
+  <li><em>Separation of Concerns:</em> Configuration files isolate application logic from environment-specific details, promoting modularity and simplifying deployment and maintenance.</li>
+  <li><em>Flexibility:</em> Configuration files enable easy adjustment of application behavior without code changes, facilitating adaptation to various environments.</li>
+  <li><em>Security:</em> Sensitive information, like credentials, remains secure by storing it in configuration files instead of hard-coding it within the codebase.</li>
+  <li><em>Collaboration:</em> Centralizing configuration variables in files enhances teamwork and allows efficient adjustments based on specific requirements.</li>
+  <li><em>Maintainability:</em> Configuration files simplify updates and troubleshooting, making it easier to manage and modify variables when needed.</li>
 </ol>
 
 <h2 id="limitations-of-env-files">Limitations of <code class="language-plaintext highlighter-rouge">.env</code> files</h2>
@@ -17,10 +17,10 @@
 <p>While .env files have gained popularity for storing configuration variables, they do have limitations and challenges that developers should be aware of:</p>
 
 <ol>
-  <li><em>Limited Data Types</em>: .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
-  <li><em>Lack of Structure</em>: .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
-  <li><em>Absence of Hierarchy</em>: .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
-  <li><em>Limited Validation and Error Handling</em>: .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
+  <li><em>Limited Data Types:</em> .env files primarily support string values, which can be limiting when working with configuration variables that require different data types, such as integers, booleans, or complex structures. Converting and parsing values from strings to the desired data type can be cumbersome and error-prone.</li>
+  <li><em>Lack of Structure:</em> .env files lack a built-in structure for organizing configuration variables. As the number of variables grows, maintaining organization and readability becomes increasingly challenging. Developers often resort to naming conventions or comments to provide some level of organization, but this approach is not standardized or enforced.</li>
+  <li><em>Absence of Hierarchy:</em> .env files lack a hierarchical structure, making it difficult to group related variables together or define subsections. This can result in a flat and cluttered configuration file, especially when managing multiple environments or complex settings.</li>
+  <li><em>Limited Validation and Error Handling:</em> .env files do not provide inherent validation or error handling mechanisms. It is the responsibility of the developer to ensure the correctness and integrity of the variables. Without proper validation, it’s possible to introduce errors or inconsistencies that can cause application failures or unexpected behavior.</li>
 </ol>
 
 <p>Considering these limitations and challenges, developers often seek alternatives like .ini files with <em>configparser</em> in Python, which offer a more robust and structured approach to configuration management. In the following sections, we’ll explore the advantages of using .ini files and <em>configparser</em>, addressing these limitations and providing a superior solution for configuration handling in Python.</p>
@@ -168,7 +168,7 @@
 
   <p>In the second case, to access that value in the code, you would need to call the variable as follows:</p>
 
-  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', **vars=os.environ**)</code></p>
+  <p><code class="language-plaintext highlighter-rouge">config.get('POSTGRES', 'postgres_username', vars=os.environ)</code></p>
 </blockquote>
 
 <p>When you want to deploy your application on your server, you then, can set your <strong>environment variables values</strong> in you CI/CD (e.g. CircleCI) and create a script to export them on your server when deploying so that your code can access it.</p>
@@ -200,10 +200,6 @@ learned 5 different technologies, that’s good, but will you use them in your p
 
 <p>With code architecture, you don’t even need to ask. There is code design in every single project. When you were at school, before a test, did you
 prioritize learning potential questions or those that you were sure were in that test ?</p>
-
-<p>Moreover, recruiters know that a junior developer cannot know a tons of technologies, therefore, learning more abstract concept like good development
-practices, the most used architecture structure, code quality… allows you to be more flexible and for a junior developer, that is really good. Don’t
-get too specific.</p>
 
 <p>Finally, profiles with good knowledge of architectural design are increasingly sought after. If the code that a developer produce do not fit great
 architectural conventions or code quality, it will need to be reviewed, slowing down the delivery of a project. Depending on the progress of the
