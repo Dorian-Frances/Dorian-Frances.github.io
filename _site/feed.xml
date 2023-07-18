@@ -1,4 +1,514 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-03T10:08:27+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dorian Frances</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title><link href="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html" rel="alternate" type="text/html" title="The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files" /><published>2023-06-14T00:00:00+02:00</published><updated>2023-06-14T00:00:00+02:00</updated><id>http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files</id><content type="html" xml:base="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-18T12:27:08+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dorian Frances</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">How to bootstrap a Spring boot project using Clean Architecture</title><link href="http://localhost:4000/2023/07/18/How-to-bootstrap-a-Spring-boot-project-using-Clean-Architecture.html" rel="alternate" type="text/html" title="How to bootstrap a Spring boot project using Clean Architecture" /><published>2023-07-18T00:00:00+02:00</published><updated>2023-07-18T00:00:00+02:00</updated><id>http://localhost:4000/2023/07/18/How-to-bootstrap-a-Spring-boot-project-using-Clean-Architecture</id><content type="html" xml:base="http://localhost:4000/2023/07/18/How-to-bootstrap-a-Spring-boot-project-using-Clean-Architecture.html"><![CDATA[<h1 id="introduction">Introduction</h1>
+
+<p>Hello everyone ! Today we will talk about Spring and Java. More specifically, I’ll talk about how to bootstrap a spring boot project using Hexagonal
+Architecture. Spring boot is a very straightforward framework, but creating a very clean bootstrap using clean architecture can be disruptive.</p>
+
+<p>Hexagonal Architecture bring to the fore many concepts like :</p>
+
+<ul>
+  <li>Testability</li>
+  <li>Separation of business code and technical implementation</li>
+  <li>Code modularity / scalability</li>
+</ul>
+
+<p>Many of you could think that using hexagonal architecture to start a little project can be a little bit wordy and you are not completely wrong but in
+the other hand, it also provides a comprehensive structure of your project.</p>
+
+<blockquote>
+  <p>👉 Also, I would not lie about the fact that <strong>I do not have enough knowledge about all the different kind of architecture</strong>. Here, I simply suggest
+a way of bootstrapping a project using hexagonal architecture. Feel free not to use it if you don’t want to. 😉</p>
+</blockquote>
+
+<h1 id="github-repository">Github repository</h1>
+
+<p>You can find the entire bootstrap project by clicking 📂 <a href="https://github.com/dorian-frances/df-java-template">this link</a>. <strong>Feel free to use it as you
+want !</strong></p>
+
+<h1 id="initialize-a-project">Initialize a project</h1>
+
+<p>The first thing we need to do is to create our spring-boot project (I used <strong>maven</strong> here as my package manager).</p>
+
+<p>Using IntelliJ IDEA, you might come up with something like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── org
+    │   │       └── example
+    │   │           └── Main.java
+    │   └── resources
+    └── test
+        └── java
+</code></pre></div></div>
+
+<h1 id="target-project">Target project</h1>
+
+<p>The application we want to create here is pretty basic, we will build a <strong>RestAPI</strong> with <strong>one endpoint</strong> that will allow us to <strong>retrieve a user</strong> in
+a <strong>PostgreSQL database</strong> given its ID.</p>
+
+<p>Going further, we pretty much see the elements that we will need:</p>
+
+<ul>
+  <li>A <strong>RestAPI</strong> implementing the route to retrieve our <em>user</em></li>
+  <li>Some <strong>business code logic</strong></li>
+  <li>A local <strong>PostgreSQL</strong> database</li>
+  <li>An <strong>ORM</strong>, simplifying database requests</li>
+</ul>
+
+<h1 id="clean-architecture">Clean Architecture</h1>
+
+<p>For now, we see that our code structure does not fit hexagonal architecture. To solve this, we want our code to contain those elements:</p>
+
+<ul>
+  <li>An <strong>application</strong> folder: this folder will contain all the technical implementation that will consume our application (in our case, the RestAPI
+that we will build).</li>
+  <li>An <strong>infrastructure</strong> folder: this folder will contain all the technical implementation that will be used by our application (in our case, the
+PostgreSQL implementation).</li>
+  <li>A <strong>domain</strong> folder: this is the most important folder. This is where all your business code has to be. All the code that contains <strong>added value</strong>
+has to be in here.</li>
+  <li>A <strong>bootstrap</strong> folder: this folder contains all the code that allow us to start our application, this is where we initialize it.</li>
+</ul>
+
+<blockquote>
+  <p>👉 <strong>IMPORTANT</strong>: <em>domain-driven-development</em> state that our domain needs to be independent from all technical implementation. The fact is, technical
+implementation <strong>may change</strong> over time, your <strong>business code usually do not</strong>. However, our domain still needs to communicate with the other parts
+of
+our application, that is why, we will create <em>application-domain</em> and <em>domain-infrastructure</em> interfaces. by doing this, we ensure better modularity
+and better testability of our application (we’ll see this later in this article).</p>
+</blockquote>
+
+<p>Now, our application should look like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── application
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── org.example
+│       │   └── resources
+│       └── test
+│           └── java
+├── bootstrap
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── org
+│       │   │       └── example
+│       │   │           └── Main.java
+│       │   └── resources
+│       └── test
+│           └── java
+├── domain
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── org
+│       │   │       └── example
+│       │   └── resources
+│       └── test
+│           └── java
+├── infrastructure
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── org
+│       │   │       └── example
+│       │   └── resources
+│       └── test
+│           └── java
+└── pom.xml
+</code></pre></div></div>
+
+<p>We will now go through all the different folders to understand how we implemented each of them.</p>
+
+<h1 id="deep-diving-in-our-project-structure">Deep diving in our project structure</h1>
+
+<h2 id="application">Application</h2>
+
+<p>After that we implemented our rest-api-adapter, the folder has this structur:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>application
+├── pom.xml
+├── rest-api-adapter
+    ├── pom.xml
+    ├── src
+    ├── main
+    │   ├── java
+    │   │   └── io.df.java.template.application.rest.api.adapter
+    │   │                                   ├── controller
+    │   │                                   │   └── UserController.java
+    │   │                                   └── mapper
+    │   │                                       ├── DfExceptionMapper.java
+    │   │                                       └── UserMapper.java
+    │   └── resources
+    └── test
+         └── java
+</code></pre></div></div>
+
+<p>The two main things that we’ll talk about here are our <code class="language-plaintext highlighter-rouge">UserController</code> and the <code class="language-plaintext highlighter-rouge">UserMapper</code> .</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@Tags</span><span class="o">(</span><span class="nd">@Tag</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"User"</span><span class="o">))</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="kd">implements</span> <span class="nc">UserApi</span> <span class="o">{</span>
+
+    <span class="kd">final</span> <span class="nc">UserFacade</span> <span class="n">userFacade</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">GetUserDTO</span><span class="o">&gt;</span> <span class="nf">getUser</span><span class="o">(</span><span class="no">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userFacade</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">getUserFromDomainToResponse</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">DfException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">mapDfExceptionToContract</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">errorToGetUserDTO</span><span class="o">(</span><span class="n">exception</span><span class="o">),</span> <span class="n">exception</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is the implementation of our user endpoint. We can see that this controller <strong>implements</strong> the <code class="language-plaintext highlighter-rouge">UserApi</code>. This, is an interface generated by
+the <a href="https://openapi-generator.tech/docs/plugins">openapi-generator</a> used in our <em>contract-first</em> methodology.</p>
+
+<blockquote>
+  <p>👉 If you look at the <strong>README.md</strong> file in the github repository, you will get an explanation about using <em>contract-first</em> methodology. Basically,
+it allows us to define (in a contract) the different endpoints of our API that will be generated during <strong>build</strong> so that we only need to implement
+them after.</p>
+</blockquote>
+
+<p>Anyway, we notice different thins in this controller, the use of a <code class="language-plaintext highlighter-rouge">UserFacade</code> that we pass in the constructor of our controller (notice
+the <code class="language-plaintext highlighter-rouge">@AllArgsConstructor</code> decorator here). As I explained <a href="#clean-architecture">here</a>, we pass an interface to our controller that our <strong>domain</strong> will
+then implement to increase modularity / testability of our code and independence of our <em>domain</em>.</p>
+
+<p>The second thing is the use of <code class="language-plaintext highlighter-rouge">getUserFromDomainToResponse</code> method from the <code class="language-plaintext highlighter-rouge">UserMapper</code> class. We really want to make a distinction between <strong>domain
+models</strong> and <strong>API entity</strong>. That is the purpose of the mapper here.</p>
+
+<blockquote>
+  <p>👉 We’ll talk about the <code class="language-plaintext highlighter-rouge">DfExceptionMapper</code> class in the <a href="#domain">domain section</a>.</p>
+</blockquote>
+
+<h2 id="domain">Domain</h2>
+
+<p>Our domain looks like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>domain
+├── pom.xml
+├── src
+     ├── main
+     │   ├── java
+     │   │   └── io.df.java.template.domain
+     │   │                       ├── exception
+     │   │                       │   ├── DfException.java
+     │   │                       │   └── DfExceptionCode.java
+     │   │                       ├── model
+     │   │                       │   └── User.java
+     │   │                       ├── port
+     │   │                       │   ├── in
+     │   │                       │   │   └── UserFacade.java
+     │   │                       │   └── out
+     │   │                       │       └── UserStoragePort.java
+     │   │                       └── service
+     │   │                           └── UserService.java
+     │   └── resources
+     └── test
+         └── java
+           └── io.df.java.template.domain
+                                 └── service
+                                     └── UserServiceTest.java
+</code></pre></div></div>
+
+<p>First, our <code class="language-plaintext highlighter-rouge">UserService</code> :</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="kd">implements</span> <span class="nc">UserFacade</span> <span class="o">{</span>
+
+    <span class="nc">UserStoragePort</span> <span class="n">userStoragePort</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">User</span> <span class="nf">getUser</span><span class="o">(</span><span class="no">UUID</span> <span class="n">userId</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">DfException</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">optionalUser</span> <span class="o">=</span> <span class="n">userStoragePort</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">optionalUser</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="nc">DfException</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">dfExceptionCode</span><span class="o">(</span><span class="nc">DfExceptionCode</span><span class="o">.</span><span class="na">USER_NOT_FOUND_EXCEPTION</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Failed to find user with id %s"</span><span class="o">,</span> <span class="n">userId</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">optionalUser</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is the service that implements the interface called in the <code class="language-plaintext highlighter-rouge">UserController</code> . The same way, this service calls another interface to fetch the
+user that we want in the database.</p>
+
+<p>All those interfaces are called <code class="language-plaintext highlighter-rouge">port</code> and you can see that they are defined in our domain wearing the designation <code class="language-plaintext highlighter-rouge">port.in</code> and <code class="language-plaintext highlighter-rouge">port.out</code>.</p>
+
+<p>In the domain, we can also find our <code class="language-plaintext highlighter-rouge">UserModel</code> . This is the object that will be manipulated in our domain. In there we can not find entities from
+our API or our database. This would break hexagonal architecture principles.</p>
+
+<p>Finally, we also see an <code class="language-plaintext highlighter-rouge">exception</code> folder. In this project, we defined our own exceptions allowing us to customize the exceptions that we wanna
+throw. For example, in our <code class="language-plaintext highlighter-rouge">UserService</code> if we threw an <code class="language-plaintext highlighter-rouge">HttpNotFoundException</code> , this would mean that our domain is aware that we are using an HTTP
+protocol as a technical implementation. Again, this breaks <em>hexagonal architecture</em> and <em>domain-driven-development</em> principles. To avoid that, we
+throw customized exceptions that we’ll map INSIDE of our <code class="language-plaintext highlighter-rouge">rest-api-adapter</code> (this is the purpose of the <code class="language-plaintext highlighter-rouge">DfExceptionMapper</code> class in our <code class="language-plaintext highlighter-rouge">application</code>
+folder).</p>
+
+<p>This way, our domain only knows that he has to throw an exception without knowing how those are handled in the technical implementations.</p>
+
+<h2 id="infrastructure">Infrastructure</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>infrastructure
+├── pom.xml
+├── postgres-adapter
+     ├── pom.xml
+     ├── src
+          ├── main
+          │   ├── java
+          │   │   └── io.df.java.template.infrastructure
+          │   │                       └── postgres
+          │   │                           ├── adapter
+          │   │                           │   └── PostgresUserAdapter.java
+          │   │                           ├── configuration
+          │   │                           │   └── PostgresConfiguration.java
+          │   │                           ├── entity
+          │   │                           │   └── UserEntity.java
+          │   │                           ├── mapper
+          │   │                           │   └── UserEntityMapper.java
+          │   │                           └── repository
+          │   │                               └── UserRepository.java
+          │   └── resources
+          │       └── db.changelog
+          │           ├── changelogs
+          │           │    └── 00000000_init_user_schema.sql
+          │           └── db.changelog-master.yaml
+          └── test
+             └── java
+</code></pre></div></div>
+
+<p>As mentioned earlier, this is where all technical implementations <strong>used by</strong> our application should be. Thus, in our case, we can only find
+our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> designed to handle relation with our database.</p>
+
+<p>In this project, we used <a href="https://hibernate.org/">Hibernate</a> for our ORM along with <a href="https://www.liquibase.org/">Liquibase</a> to handle database
+migration (I will not deep dive into the use of liquibase, but that explains the presence of the <code class="language-plaintext highlighter-rouge">db.changelog</code> directory in this adapter).</p>
+
+<p>Again we can find a <code class="language-plaintext highlighter-rouge">mapper</code> directory to handle mapping between <em>postgres entities</em> and <em>domain models</em>.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">PostgresUserAdapter</code> class looks like that:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostgresUserAdapter</span> <span class="kd">implements</span> <span class="nc">UserStoragePort</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">getUser</span><span class="o">(</span><span class="no">UUID</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">userId</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="nl">UserEntityMapper:</span><span class="o">:</span><span class="n">fromEntityToDomain</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And the configuration of the entire module is:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableAutoConfiguration</span>
+<span class="nd">@EnableTransactionManagement</span>
+<span class="nd">@EnableJpaAuditing</span>
+<span class="nd">@EntityScan</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"io.df.java.template.infrastructure.postgres.entity"</span><span class="o">})</span>
+<span class="nd">@EnableJpaRepositories</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"io.df.java.template.infrastructure.postgres.repository"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostgresConfiguration</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">PostgresUserAdapter</span> <span class="nf">postgresUserAdapter</span><span class="o">(</span><span class="kd">final</span> <span class="nc">UserRepository</span> <span class="n">userRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PostgresUserAdapter</span><span class="o">(</span><span class="n">userRepository</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We define here the packages where Spring will be able to find our <code class="language-plaintext highlighter-rouge">Entities</code> and <code class="language-plaintext highlighter-rouge">JpaRepositories</code> .</p>
+
+<h2 id="bootstrap">Bootstrap</h2>
+
+<p>Finally, the bootstrap folder. As we passed interfaces as dependencies along all our application, we now have to tell our application which classed
+should implement this or this interface. This is done during the runtime of our application through this <code class="language-plaintext highlighter-rouge">bootstrap</code> folder.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootstrap
+├── pom.xml
+├── src
+    ├── main
+    │   ├── java
+    │   │   └── io.df.java.template.bootstrap
+    │   │                       ├── DfJavaTemplateApplication.java
+    │   │                       └── configuration
+    │   │                           ├── DfJavaTemplateConfiguration.java
+    │   │                           ├── DomainConfiguration.java
+    │   │                           └── RestApiConfiguration.java
+    │   └── resources
+    │       └── application.yaml
+    └── test
+        ├── java
+        |   └── io.df.java.template.bootstrap
+        │                       ├── DfJavaTemplateITApplication.java
+        │                       └── it
+        │                           ├── AbstractDfJavaTemplateBackForFrontendApiIT.java
+        │                           └── UserApiIT.java
+        └── resources
+            └── application-it.yaml
+</code></pre></div></div>
+
+<p>We can see in the structure of this folder different configuration files. Indeed, we will find one configuration file for our domain folder and one
+for each adapters of our application (you can find the configuration folder of our <code class="language-plaintext highlighter-rouge">postgres-adapter</code> in the adapter itself).</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">DfJavaTemplateApplication</code> class will then, looks like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableConfigurationProperties</span>
+<span class="nd">@Import</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="nc">DfJavaTemplateConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">DomainConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">PostgresConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">RestApiConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@Slf4j</span>
+<span class="nd">@EnableAsync</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DfJavaTemplateApplication</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">DfJavaTemplateApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>👉 Do not forget to import all of your application configurations in the startup class so that Spring can find them and initialize each of the
+defined beans.</p>
+</blockquote>
+
+<p>For example, the dependency injection for our <code class="language-plaintext highlighter-rouge">RestApiConfiguration</code> is:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RestApiConfiguration</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">UserController</span> <span class="nf">userController</span><span class="o">(</span><span class="kd">final</span> <span class="nc">UserService</span> <span class="n">userService</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">UserController</span><span class="o">(</span><span class="n">userService</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="testing-strategy">Testing strategy</h1>
+
+<p>Obviously, we can not forget to test our application. That is why, in this project, you will find to types of tests.</p>
+
+<h2 id="unit-tests">Unit Tests</h2>
+
+<p>An example of unit test is present in our domain folder. This type of tests are used to validate that our application behave as we want it to.</p>
+
+<blockquote>
+  <p>👉 For these tests, we do not want to reach technical implementations. Thus, we’ll have to <em>mock</em> every call to technical implementations.
+Fortunately, thanks to the use of interfaces, it is really easy to do.</p>
+</blockquote>
+
+<p>For example:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+    <span class="kt">void</span> <span class="nf">should_return_user_given_a_user_id</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">DfException</span> <span class="o">{</span>
+        <span class="c1">// Given</span>
+        <span class="kd">final</span> <span class="no">UUID</span> <span class="n">userIdFake</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="nc">String</span> <span class="n">usernameFake</span> <span class="o">=</span> <span class="n">faker</span><span class="o">.</span><span class="na">ancient</span><span class="o">().</span><span class="na">god</span><span class="o">();</span>
+
+        <span class="c1">// When</span>
+        <span class="n">when</span><span class="o">(</span><span class="n">userStoragePortMock</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">userIdFake</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">thenReturn</span><span class="o">(</span><span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="nc">User</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">id</span><span class="o">(</span><span class="n">userIdFake</span><span class="o">).</span><span class="na">username</span><span class="o">(</span><span class="n">usernameFake</span><span class="o">).</span><span class="na">build</span><span class="o">()));</span>
+        <span class="kd">final</span> <span class="nc">User</span> <span class="n">resultUser</span> <span class="o">=</span> <span class="n">userService</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">userIdFake</span><span class="o">);</span>
+
+        <span class="c1">// Then</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">resultUser</span><span class="o">.</span><span class="na">getId</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">userIdFake</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">resultUser</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">usernameFake</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="integration-tests">Integration tests</h2>
+
+<p>Those tests are different. <strong>They also have more value</strong> as they test the behaviour of our application <strong>WITH</strong> the use of technical implementations.
+Consequently, <strong>they are more difficult to write</strong>. Indeed, we need to fake the startup of our application in order to enable us to fake some calls on
+our API.</p>
+
+<p>You’ll find an example of integration test file in the bootstrap folder.</p>
+
+<h1 id="continuous-integration-ci">Continuous Integration (CI)</h1>
+
+<p>We also integrated a <code class="language-plaintext highlighter-rouge">.circleci</code> folder along with a <code class="language-plaintext highlighter-rouge">config.yml</code> file in this project.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="m">2.1</span>
+<span class="na">machine</span><span class="pi">:</span> <span class="kc">true</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build-and-test</span><span class="pi">:</span>
+    <span class="na">machine</span><span class="pi">:</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu-2004:202107-02</span>
+      <span class="na">docker_layer_caching</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">checkout</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Install OpenJDK </span><span class="m">17</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">sudo apt-get update &amp;&amp; sudo apt-get install openjdk-17-jdk</span>
+            <span class="s">sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java</span>
+            <span class="s">sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Generate cumulative pom.xml checksum</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">find . -type f -name "pom.xml" -exec sh -c "sha256sum {} &gt;&gt; ~/pom-checksum.tmp" \;</span>
+            <span class="s">sort -o ~/pom-checksum ~/pom-checksum.tmp</span>
+      <span class="pi">-</span> <span class="na">restore_cache</span><span class="pi">:</span>
+          <span class="na">keys</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">df-java-template-multi-module-mvn-</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">./mvnw install -T 12 -DskipTests -DskipITs</span>
+      <span class="pi">-</span> <span class="na">save_cache</span><span class="pi">:</span>
+          <span class="na">paths</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">~/.m2</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">df-java-template-multi-module-mvn-</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Unit Tests</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">./mvnw test -T </span><span class="m">12</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Integration Tests</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">./mvnw integration-test -T </span><span class="m">12</span>
+
+<span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">build-test-deploy</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">build-and-test</span>
+</code></pre></div></div>
+
+<p>The important things to see here are:</p>
+
+<ul>
+  <li>The use of a real machine on CircleCI. As we used <a href="https://java.testcontainers.org/">testcontainers</a> in order to make our integration tests, we have
+to use a real machine for our CI because we obviously can not launch a container image (our integration test container) inside of another image (the
+CI image).</li>
+  <li>The workflow: basically, only one job is present in this configuration file and it does the following steps:
+    <ul>
+      <li>Checkout the project on Github</li>
+      <li>Install Java OpenJDK 17</li>
+      <li>Restore cache</li>
+      <li>Build the project</li>
+      <li>Save cache</li>
+      <li>Run the unit tests</li>
+      <li>Run the integration tests</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Though this article, I explained how I used <em>hexagonal architecture</em> and <em>domain-driven-development</em> to create my spring-boot project since I started
+developing. Of course, I only have few years of experience, thus, I do not have much knowledge about other code architectures. However, I find this
+architecture really educational and made me understand many key concepts of application design.</p>
+
+<p>Do not hesitate to give me your feedback about this and if you want to share your knowledge about everything, you are well welcome 😉.</p>]]></content><author><name></name></author><category term="bootstrap" /><category term="architecture" /><summary type="html"><![CDATA[In this article, we explore the power of Hexagonal Architecture in combination with Spring Boot and Java. Discover how this architectural pattern enhances testability, separates business code from technical implementation, and promotes code modularity and scalability. While applying Hexagonal Architecture may initially seem verbose, its benefits offer a comprehensive and clean structure for your projects.]]></summary></entry><entry><title type="html">The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files</title><link href="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html" rel="alternate" type="text/html" title="The Power of .ini Files with configparser in Python: A Superior Alternative to .env Files" /><published>2023-06-14T00:00:00+02:00</published><updated>2023-06-14T00:00:00+02:00</updated><id>http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files</id><content type="html" xml:base="http://localhost:4000/2023/06/14/The-Power-of-ini-Files-with-configparser-in-Python-A-Superior-Alternative-to-env-Files.html"><![CDATA[<h1 id="introduction">Introduction</h1>
 
 <p>Configuration files are crucial in software development as they store essential parameters and settings that allow applications to function effectively in different environments. These files separate configuration variables from the code, offering flexibility, security, and ease of maintenance.</p>
 
